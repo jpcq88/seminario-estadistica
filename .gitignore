@@ -2,3 +2,7 @@
 *.RHistory
 *.aux
 *.pdf
+*.log
+*.out
+*.doc
+*.gz
