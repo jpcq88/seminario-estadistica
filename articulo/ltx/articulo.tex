@@ -1,0 +1,130 @@
+ \documentclass[12pt, titlepage, reqno]{article}
+ \usepackage[super]{natbib}
+ \usepackage{amssymb, latexsym}
+ \usepackage{amsmath} 
+ \usepackage{amsthm}
+ \usepackage{bm}
+ \usepackage[mathscr]{eucal}
+ \usepackage{enumerate}
+  \usepackage[spanish, es-nodecimaldot, es-lcroman, es-nosectiondot, es-tabla]{babel}
+  \usepackage[utf8]{inputenc}
+  \usepackage{hyperref}
+
+
+% \renewcommand{\thefootnote}{\alph{footnote})}    
+ \renewcommand{\baselinestretch}{2}
+ \renewcommand{\section}[1]{\medskip \addtocounter{section}{1}\raggedright 
+     \textbf{\Roman{section}. \ #1}\medskip \setcounter{subsection}{0}
+    \setlength{\parindent}{5ex}
+ }
+ \renewcommand{\subsection}[1]{\medskip \addtocounter{subsection}{1}\raggedright
+    \textbf{\Alph{subsection}. \ #1} \medskip \setcounter{subsubsection}{0}\setlength{\parindent}{5ex}
+}
+ \renewcommand{\bibsection}{\medskip \raggedright  \textbf{REFERENCES}
+    \medskip}
+ \renewcommand{\bibnumfmt}[1]{\textbf{{#1}.}\ \ }
+ \pagestyle{myheadings}
+ \markboth{\hfill Calle, Mortalidad Infantil, p.\ }{\hfill Calle, Mortalidad Infantil, p.\ }
+ \setlength{\parindent}{5ex}
+ \newtheorem{theorem}{Dictum}
+ \theoremstyle{plain}
+ \setlength{\paperwidth}{8.5in}
+ \setlength{\textwidth}{6.5in}
+ \setlength{\oddsidemargin}{0in}
+ \setlength{\evensidemargin}{0in}
+
+   
+
+ \begin{document}
+
+ \begin{titlepage}
+
+ \begin{center}
+
+ \textbf{Análisis Exploratorio Mortalidad Infantil en La Guajira y Chocó:}\\
+ 
+ \textbf{Encuesta Demografía y Salud 2010}\\
+ 
+ 
+ \vspace{10ex}
+
+Juan Pablo Calle Quintero\footnote{e-mail: jpcalleq@unal.edu.co}\\
+
+ Departamento de Estadística \\
+ 
+ Universidad Nacional de Colombia \\
+
+ Medellín, Antioquia
+
+ \end{center}
+
+ \end{titlepage}
+
+ \begin{abstract}
+
+La mortalidad infantil suele ser un indicador utilizado para medir el desarrollo de un país. Un nivel alto en este indicador está asociado por lo general a desnutrición maternoinfantil, a la carencia de servicios públicos y a otros factores socioeconómicos como la violencia. El objetivo de este trabajo es realizar un análisis descriptivo de la mortalidad infantil en Colombia, con especial énfasis en los departamentos de La Guajira y Chocó, que son los que han tenido mayor índice de mortalidad históricamente. Este trabajo es meramente exploratorio y lo que pretende es abrir un espacio de discusión sobre la mortalidad infantil en Colombia para emprender estudios más profundos. Se toma como fuente de información la Encuesta de Demografía y Salud del 2010 realizada por Demographic and Health Survey Program\footnote{The Demographic and Health Surveys (DHS) Program, \emph{Colombia: Standard DHS} (2010). \href{http://www.dhsprogram.com/data/dataset/Colombia_Standard-DHS_2010.cfm?flag=0}{http://www.dhsprogram.com}}. Se analizan los fallecimientos de niños menores a un año entre el 2000 y 2009 y se encuentran posibles asociaciones con variables como el estado civil de la madre, su nivel educativo y la carencia de sanitario y de energía.
+
+
+ \end{abstract}
+
+
+
+
+ \addtocounter{page}{2}
+
+% \section{INTRODUCCIÓN}
+% 
+% \begin{table}[ht!]
+%\centering
+%\begin{tabular}{lrrr}
+% Departamento & Fallecimientos & Nacimientos & \% \\ 
+%  \hline
+%La Guajira &  50 & 1252 & 3.99 \\ 
+%Chocó &  42 & 1126 & 3.73 \\ 
+%Bogotá &  36 & 1951 & 1.85 \\ 
+%Amazonas &  35 & 1539 & 2.27 \\ 
+%Antioquia &  32 & 1940 & 1.65 \\ 
+%Valle &  29 & 1931 & 1.50 \\ 
+%Atlántico &  28 & 1208 & 2.32 \\ 
+%Cesar &  27 & 1018 & 2.65 \\ 
+%Bolívar &  26 & 1035 & 2.51 \\ 
+%Norte de Santander &  24 & 1437 & 1.67 \\ 
+%Vaupés &  24 & 1307 & 1.84 \\ 
+%Tolima &  23 & 956 & 2.41 \\ 
+%Huila &  23 & 915 & 2.51 \\ 
+%Nariño &  23 & 1042 & 2.21 \\ 
+%Córdoba &  22 & 1101 & 2.00 \\ 
+%Vichada &  22 & 942 & 2.34 \\ 
+%Putumayo &  21 & 932 & 2.25 \\ 
+%Sucre &  20 & 1122 & 1.78 \\ 
+%Magdalena &  19 & 1128 & 1.68 \\ 
+%Santander &  18 & 1200 & 1.50 \\ 
+%Caquetá &  18 & 902 & 2.00 \\ 
+%Risaralda &  17 & 1103 & 1.54 \\ 
+%Quindío &  17 & 984 & 1.73 \\ 
+%Cauca &  17 & 842 & 2.02 \\ 
+%Boyacá &  16 & 1010 & 1.58 \\ 
+%Cundinamarca &  16 & 1022 & 1.57 \\ 
+%Meta &  16 & 981 & 1.63 \\ 
+%Guainía &  16 & 797 & 2.01 \\ 
+%San Andrés y Providencia &  11 & 768 & 1.43 \\ 
+%Casanare &  11 & 915 & 1.20 \\ 
+%Guaviare &  11 & 809 & 1.36 \\ 
+%Caldas &   9 & 944 & 0.95 \\ 
+%Arauca &   7 & 840 & 0.83 \\ 
+%   \hline
+%\end{tabular}
+%\end{table}
+ 
+ \setlength{\parindent}{5ex}
+ 
+% 
+% \begin{thebibliography}{99}
+%
+% \bibitem{dhs_col2010} The Demographic and Health Surveys (DHS) Program, \emph{Colombia: Standard DHS} (2010). 
+% 
+%  \end{thebibliography}
+ 
+ \end{document}
+ 
+  
