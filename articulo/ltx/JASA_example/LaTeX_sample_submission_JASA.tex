@@ -1,0 +1,2507 @@
+ \documentclass[12pt, titlepage, reqno]{article}
+ \usepackage[super]{natbib}
+ \usepackage{amssymb, latexsym}
+ \usepackage{amsmath} 
+ \usepackage{amsthm}
+ \usepackage{bm}
+ \usepackage[mathscr]{eucal}
+ \usepackage{enumerate}
+ \renewcommand{\thefootnote}{\alph{footnote})}    
+ \renewcommand{\baselinestretch}{2}
+ \renewcommand{\section}[1]{\medskip \addtocounter{section}{1}\raggedright 
+     \textbf{\Roman{section}. \ #1}\medskip \setcounter{subsection}{0}
+    \setlength{\parindent}{5ex}
+ }
+ \renewcommand{\subsection}[1]{\medskip \addtocounter{subsection}{1}\raggedright
+    \textbf{\Alph{subsection}. \ #1} \medskip \setcounter{subsubsection}{0}\setlength{\parindent}{5ex}
+}
+ \renewcommand{\bibsection}{\medskip \raggedright  \textbf{REFERENCES}
+    \medskip}
+ \renewcommand{\bibnumfmt}[1]{\textbf{{#1}.}\ \ }
+ \pagestyle{myheadings}
+ \markboth{\hfill Pierce and Thiam, JASA, p.\ }{\hfill Pierce and Thiam, JASA, p.\ }
+ \setlength{\parindent}{5ex}
+ \newtheorem{theorem}{Dictum}
+ \theoremstyle{plain}
+ \setlength{\paperwidth}{8.5in}
+ \setlength{\textwidth}{6.5in}
+ \setlength{\oddsidemargin}{0in}
+ \setlength{\evensidemargin}{0in}
+
+   
+
+ \begin{document}
+
+ \begin{titlepage}
+
+ \begin{center}
+
+ \textbf{Dictums for problem solving and approximation}\\
+ 
+ \textbf{in mathematical acoustics: }\\
+ 
+ \textbf{examples involving low-frequency vibration and radiation} \\
+ 
+ 
+ \vspace{10ex}
+
+Allan D. Pierce\footnote{e-mail: adp@bu.edu} and Amadou G. Thiam\\
+
+ Department of Mechanical Engineering \\
+ 
+ Boston University \\
+
+ Boston, Massachusetts 02215
+
+ \end{center}
+
+ \end{titlepage}
+
+ \begin{abstract}
+
+A sequence of dictums for mathematical acoustics is given representing  opinions intended to be regarded as authoritative, but not necessarily   universally agreed upon.  The   dictums are presented  in the context of the detailed solution for a   class of problems  involving the forced vibration of a  long cylinder protruding half-way into a half-space bounded by a compliant surface (impedance boundary) characterized by a  spring constant.  One limiting case corresponds to a cylinder vibrating within a slit in an infinite rigid baffle, and another limiting case  corresponds to a vibrating cylinder on the compliant surface of an incompressible fluid.  The second limiting case is identified as analogous to that of a floating half-submerged cylinder whose vibrations cause water waves  to propagate over the  surface.  Attention is focused on vibrations at very low frequencies.  Difficulties with insuring a causal solution are pointed out and dictums are given as to how one overcomes such difficulties.  Various approximation techniques are described.   The derivations   involve  application of the theory of complex variables and the method of matched asymptotic expansions, and the results include the apparent entrained mass in the near field of the cylinder and the radiation resistance per unit length experienced by the vibrating cylinder.
+
+
+ \end{abstract}
+
+
+
+
+ \addtocounter{page}{2}
+
+ \section{INTRODUCTION}
+ 
+ \setlength{\parindent}{5ex}
+ 
+  
+ 
+ The present paper, which is of a tutorial nature,  represents an attempt to lay down some suggestions, precepts, or rules (but which, as explained further below, are more appropriately called \emph{dictums}) for the analytical solution of mathematical problems associated with acoustics and related fields.  The paper is roughly in the same spirit as what Polya\citep{Polya} sought to do in his 1945 book, \emph{How to Solve It: A New Aspect of Mathematical Method}.    Such attempts to give codified advice in science go back at least as far as to Francis Bacon (1561---1626) and to Ren\'e Descartes (1596--1650), whose relevant writings,   \emph{The Advancement of Learning},\citep{Bacon} \emph{Rules for the Direction of the Mind},\citep{Descartes1}${}^,$\citep{Descartes2} and   \emph{Discourse on Method},\citep{Descartes3}${}^,$\citep{Descartes4} are still widely available today.  A more restricted attempt for codification, but one the present authors believe to be worthy of admiration, are the two similar books coauthored in 1978 and 1979 by Ledgard: \emph{FORTRAN with Style: Programming Proverbs}
+ by Ledgard and Churma,\citep{FORTRAN}
+ and  \emph{PASCAL with Style: Programming Proverbs} by Ledgard, Nagin, and Hueras.\citep{PASCAL}  Perhaps the most widely quoted of these programming proverbs is  Proverb 4,  which stated: ``Think first, code later.''
+ 
+ \medskip
+ 
+ 
+ In comparison with the works just cited, the purpose of the present paper is extremely modest.   It is acknowledged that sophisticated mathematics and approximation techniques have traditionally played a major role in acoustics research.  One can point to past masters of the art (such as Stokes, Helmholtz, Kirchhoff, Rayleigh, Horace Lamb, Arthur Gordon Webster, Louis Vessot King, Bouwkamp,  Pekeris, Brekhovskikh, Lighthill, Ffowcs-Williams, David Crighton, and many others)  for illustrations of how important (but  initially seeming to be intractable) problems were artfully posed and then solved --- not exactly, but in an approximate manner that was satisfactory for the circumstances of interest.  (For brevity, explicit references to the works of past masters are omitted in this introduction.)  Such an art is difficult to teach.  At best, one learns the art both by studying examples  and by practice, and it is probably so that no one ever masters the art fully to their own satisfaction.  Trying to learn by reading recently published journal articles can be frustrating, because the nature of our current peer-review system for selecting articles for print necessitates that an account of much of the relevant intellectually challenging steps (which might have pedagogical value) has had to be omitted.  
+ 
+ \medskip
+ 
+A cursory scan of the current peer-reviewed literature in acoustics suggests  that the proportion, if not the absolute number, of workers in acoustical research who are moderately skilled in the art is  considerably smaller than was the case, say, 60 years ago.  The proffering of   conjectures as to why this might be so is outside the scope of the present paper.  Instead, a modest attempt is here being made to influence some readers so that the proportion may   increase, or else decrease not so much. 
+ 
+\medskip
+
+The choice of the word \emph{dictums} in the title of this paper was made after considerable deliberation.  Alternates considered were \emph{rules}, \emph{suggestions}, \emph{maxims}, \emph{precepts}, and \emph{proverbs}.  However, consultation with various dictionaries indicated that none of the alternates had quite the appropriate meaning.  Dictums is one of  two admissible plurals of \emph{dictum}; the other  plural \emph{dicta} is used only in Latin phrases and legal writings.  (Some readers might  conceivably challenge the choice here of ``dictums'' and could possibly point to the fact that the word ``data'' is the most widely used plural  form of the word ``datum.''  However, according to the most recent version of the  Merriam-WebsterÕs Collegiate Dictionary,\citep{Mirriam} ``Data leads a life of its own, quite independently of datum, of which it was originally the plural.  It often serves as an abstract mass noun (like information), taking a singular verb and singular modifiers.''   Undoubtedly, most readers will concur with the statement that ``dicta'' does not lead a life of its own.  Such a discussion of the peculiarities of the English language is, of course, far outside the scope of the present paper.)  It also  seemed  unlikely that the plural ``dicta'' would be recognizable to the majority of the readers of this journal.   
+
+
+The word \emph{dictum} has the definition\citep{Mirriam}
+(\emph{Merriam-Webster's Collegiate Dictionary, Eleventh Edition}) of being   \emph{a noteworthy statement}, such as \emph{a formal announcement of a principle, proposition,   or opinion}, or \emph{an observation intended or regarded as authoritative}.  The use of the word \emph{opinion} acknowledges that readers should not necessarily agree with a dictum.  But the definition also implies that whatever is claimed to be a dictum should at least be worthy of consideration. The authors assert that the statements presented here as dictums are truly in accord with this dictionary definition.  They are not rules, they are not proverbs, they are not suggestions, and they are not maxims.  But they are dictums.  
+
+\medskip 
+
+With respect to Descartes's writings mentioned above, his rule number 4, restated below as a dictum,  is especially apropos for the present paper.
+
+\begin{theorem}
+In the search for the truth of things, method is indispensable.
+\end{theorem} 
+ 
+
+ 
+
+\section{POSING THE PROBLEM}
+
+
+
+
+For the teaching of advanced mathematical techniques in the applied sciences, it is generally accepted that discussion of generalities at the outset is not good from a pedagogical standpoint.  It is perhaps best to study explicit examples, understand them in detail, and then, along the way, extract generalities from them.  With this purpose, only a special set of closely related examples are considered here, all being special cases of a single generic example.   If one wishes, one can first ignore the details of the examples, and simply scan through the dictums that are introduced.  The dictums are phrased in such a manner that they are independent   of the examples.  
+
+\medskip
+
+\subsection{Vibrating cylinder in a wall}
+
+
+The examples considered can all be considered as a variant of the familiar text book problem\citep{PistonInWall} of the radiation of sound from a vibrating piston in a wall, where the piston is taken as circular and planar.  For this  problem, a typical derived quantity of interest (especially from the standpoint of transducer design) is the radiation impedance, which, for constant frequency radiation, is the ratio of the complex amplitude of the force exerted on the neighboring fluid  by the piston to the complex amplitude of the velocity of the piston.  The present paper also focuses on the derivation of quantities analogous to radiation impedance, but the nature of the piston and of the wall are somewhat different.     Here, the circular planar piston, nominally flush with the wall, is replaced by a half-cylinder  protruding from the wall (Fig. 1).  The motion of the surface of this half-cylinder is taken to be the same as if it were part of a solid cylinder moving as a rigid body, with  very small amplitude, the solid cylinder vibrating back and forth within a slot within the wall.  The interest here is in the field immediately outside the surface of the cylinder and at radial distances $r$ that are much less than the length $L$ of the cylinder.  Given these restrictions, one can adopt a model for which the cylinder length is formally infinite ($L\to\infty$).  Also, the region in the  space outside the wall is considered to be sufficiently large that no echoes from distant boundaries will appreciably affect the field in the vicinity of the cylinder, so the space can be idealized as unbounded in the two coordinates $x$ and $y$.  Consequently, one refers to this space as a ``half-space.''  (A small but not explicitly considered attenuation mechanism in the medium should also account for the negligible influence of such echoes.)
+
+\medskip
+
+
+The wall is taken, not as a rigid wall, as is done for the textbook example, but as a locally reacting wall of finite impedance.    Such an idealization is commonly used for studies of sound propagation in the atmosphere over the ground.\citep{Embleton}    At any given point one has
+\begin{equation}
+\left\{\frac{\hat p}{\hat v_\mathrm{in} }\right\}_{y=0}= Z,
+\end{equation}
+where $\hat p$ is the complex amplitude of the acoustic part of the pressure just outside the wall, and where  $\hat v_\mathrm{in}$ is the complex amplitude of the component of the fluid velocity into the wall.   The specific acoustic impedance $Z$ is typically taken as independent of position on the wall, and such an idealization is also adopted here.  Numerical complications are avoided with the wall being  further idealized  to be purely spring-like, so that the inward displacement of the wall  is directly proportional to the acoustic pressure outside, so that one writes
+\begin{equation}
+\left\{\frac{  p}{  \eta_\mathrm{in} }\right\}_{y=0}= K_\mathrm{sp}.
+\end{equation}
+Here, the spring constant $K_\mathrm{sp}$ per unit area of the wall is taken as independent of frequency, so that one need not express the definition in terms of complex amplitudes.  The quantity $p$ is the acoustic part of the pressure outside the wall, and  $ \eta_\mathrm{in}$ is the inward displacement of the wall surface, so that
+\begin{equation}
+v_\mathrm{in}  = \frac{\partial \eta_\mathrm{in}}{\partial t}.
+\end{equation}
+Note that a partial derivative is needed here, because, while $K_\mathrm{sp}$ is independent of position, the field at the wall will not necessarily be so.  Given this ``spring-like wall'' simplification, the specific impedance of the wall becomes  (with $e^{-i\omega t}$ time dependence)
+\begin{equation}
+Z = \frac{K_\mathrm{sp}}{-i\omega}.
+\end{equation}
+so that the impedance is purely imaginary.
+
+\medskip
+ 
+
+
+Because the generic problem under consideration involves radiation and reaction forces caused by  the transverse vibration of a   long circular cylinder  and because the properties of the boundary surface are independent of position, the resulting motion of the medium is two-dimensional.  One reason for the selection of a two-dimensional problem  is to allow a discussion of some mathematical complications that are usually not adequately explained in graduate-level textbooks and  courses.  
+
+\medskip
+
+\subsection{Notation}
+
+
+ As discussed above, one considers a circular cylinder  (idealized as infinitely long) of radius $a$ that is nominally centered at a slot of width $2a$ in a compliant baffle (Fig. 1).      The nominally flat  surface on both sides of the slot is taken as the surface $y=0$, and the coordinate $y$ pointing into the medium is referred to  as the downward coordinate.    (The use here of the term ``downward''   allows a greater correspondence with limiting cases where the medium is the ocean and the the bounding surface is the water surface.)
+ 
+ 
+\medskip
+
+
+\begin{theorem}  
+When posing any problem, one should recognize at the outset that the selection of notation is important.  One should seek to select it so that the ensuing analysis is not any more unwieldy than necessary, and so that it is similar to the notation used in the past by other investigators for similar problems, and so that the analysis can be understood by others as easily as is practicable.
+\end{theorem}
+
+The cylinder's axis is nominally at the origin in the two-dimensional ($x,y$) coordinate system, and the cylinder is rigid.  The cylinder is forced to move up and down, the motion being constrained so that the displacement of the cylinder axis is always small compared with the radius $a$.  One writes the velocity of the cylinder as 
+\begin{equation}
+\bm{V}(t) = V(t) \bm{e}_y, \qquad V(t) = \frac{d Y_c(t)}{dt} ,
+\end{equation}
+where the speed $V(t)$ and the downward cylinder displacement $Y_c(t)$ are  oscillating functions of time $t$, and where $\bm{e}_y$ is the unit vector in the direction of increasing $y$.  (The traditional symbols, $\bm{i}$, $\bm{j}$, $\bm{k}$, for unit vectors in Cartesian coordinates are usually inconvenient to use in advanced mathematical discussions, and their  use interferes with the desire to use these symbols in other contexts.  The use of $\bm{e}$, corresponding to the German word \emph{Einheit} for unit, is preferable.)
+
+
+\medskip
+
+Polar coordinates are also used in the solution, with $r$ denoting the distance in the $x$-$y$ plane, and with $\theta$ denoting the counter-clockwise angle reckoned from the positive $x$-axis (which points to the left).  The positive 
+$x$-axis corresponds to $\theta = 0$, and the negative $x$-axis corresponds to $\theta = \pi$.
+
+ 
+\medskip
+
+\subsection{Governing equations}
+
+
+ 
+
+\begin{theorem}  
+Even though the interest may be in oscillations of constant frequency, formulate problems initially as though they were transient problems.
+\end{theorem}
+
+
+\begin{theorem} 
+Unless you  believe that nonlinear effects are important,   use    the linear approximation at the outset.
+\end{theorem}
+
+
+If one is writing a paper for a journal, the first of these two dictums might not be followed in the actual presentation, as brevity is often the overriding consideration.  However, when you are at your desk, brevity is not all that important, and there are known pitfalls that one can encounter when one formulates a steady-state radiation problem.   Such might be encountered if there is not   sufficient recognition that the steady-state solution is something that evolves from a transient solution.
+
+
+\medskip
+
+
+The latter dictum should be obvious to most readers.  Nonlinear problems are typically considerably more difficult to solve than linear problems, and a sizable arsenal of applicable mathematics exists for the solution of linear problems.  After one has satisfactorily solved or understood the linear problem, attention can be given to the nonlinear problem.
+
+\medskip
+
+ 
+\medskip
+For the generic problem at hand, and in accord with the dictums just stated, the problem formulation (possibly involving a suitable linearization of nonlinear equations) leads to the linearized  Euler equation,
+\begin{equation}
+\rho \frac{\partial \bm{v}}{\partial t} = - \bm{\nabla} p,
+\end{equation}
+and to the relation, incorporating conservation of mass and the equation of state,
+\begin{equation} \label{pressure_time_derivative}
+\frac{\partial p}{\partial t} + \rho c^2 \bm{\nabla}\bm{\cdot}\bm{v} =0.
+\end{equation}
+Here $\rho$ is the ambient density and $c$ is the speed of sound, both of which are  assumed to be constant throughout the medium. The quantity $p$ is the acoustic part (relative to ambient pressure $p_o$) of the pressure, and $\bm{v}$ is the acoustically-induced velocity of the fluid matter in the medium.
+
+\medskip
+
+\noindent
+{\bf\emph{The artifice of fictitious damping}}
+
+\medskip
+
+At times, it may be appropriate to take the linearized Euler equation with a fictitious damping term included,
+\begin{equation}
+\rho\left[  \frac{\partial \bm{v}}{\partial t}  + \nu_\mathrm{art}\bm{v}\right]= - \bm{\nabla} p,
+\end{equation}
+where the quantity $\nu_\mathrm{art}$ is an artificial (hence, the subscript ``art'') damping constant with units of one divided by time.  This artifice was apparently first introduced by Rayleigh,\citep{Rayleigh_dissipation} and is generally used only for the solution of constant-frequency problems.\citep{PierceAcousticGravity}  Since the term in most acoustical applications has no actual physical basis, the solution proceeds as if $\nu_\mathrm{art}$ is small but nonzero, and then one lets it go to zero at some point during the solution.  This artifice is used further below in the present paper.
+
+\begin{theorem}
+Be willing to introduce small damping terms in the governing equations whenever you anticipate they will be needed to circumvent mathematical ambiguities.
+\end{theorem}
+
+\medskip
+
+
+
+\noindent
+{\bf\emph{Boundary conditions}}
+
+\medskip
+
+
+ 
+
+The boundary condition at the nominal location of the cylinder surface on the above-stated linear field equations is 
+\begin{equation} \label{cylinder_boundary_condition}
+\bm{v} \bm{\cdot} \bm{e}_r = V(t) \bm{e}_y\bm{\cdot}\bm{e}_r \quad \mbox{at $r=a$}.
+\end{equation}
+Here   $\bm{e}_r$ is the unit vector in the radial direction.   This equation is the linearized version of the requirement that the normal component of the local fluid velocity at an interface be the same as that of the   interface.  While the position of the surface is changing, it is sufficient in the linear approximation to apply it at the nominal position  of the surface.
+
+
+\medskip
+
+The boundary condition that the compliant wall behaves as a impenetrable surface backed by a distributed spring can be written
+\begin{equation} \label{surfaceboundarycondition}
+v_y = - \frac{\partial \eta_\mathrm{in} }{\partial t} ;  \qquad p = K_\mathrm{sp}\eta_\mathrm{in}\qquad   \mbox{at $y=0$, and for $|x| > a$}.
+\end{equation}
+  With the use of the Euler equation, as stated in Cartesian coordinates, this second boundary condition can be rewritten
+\begin{equation} 
+\frac{\partial p}{\partial y}  = \frac{\rho}{K_\mathrm{sp}} \frac{\partial^2 p}{\partial t^2}\qquad   \mbox{at $y=0$, and for $|x| > a$}.
+\end{equation}
+
+\medskip
+
+If it should be found necessary to introduce artificial damping in the  model to resolve ambiguities, then this boundary condition should be replaced by 
+\begin{equation}
+\frac{\partial p}{\partial y}  = \frac{\rho}{K_\mathrm{sp}}\left[ \frac{\partial^2 p}{\partial t^2}
++  \nu_\mathrm{art}\frac{\partial p}{\partial t}\right] \qquad   \mbox{at $y=0$, and for $|x| > a$}.
+\end{equation}
+
+
+
+\medskip
+
+\noindent
+{\bf\emph{Causality requirement for unbounded media}}
+
+\medskip
+
+
+To avoid unnecessary complications and in accord with the above discussion to the effect that the field near the cylinder is not expected to be affected by echoes from distant boundaries, the lower half-space is idealized as unbounded.  An additional boundary condition is the initial condition:  if the oscillating cylinder is the cause of any disturbance in the surrounding medium, then both $p$ and $\bm{v}$ must both be identically zero at all times before that time $t_o$ at which the cylinder velocity $V(t) $ first becomes nonzero.  This requirement should also be construed as the causality requirement.  Because the disturbance   propagates out from the source at a finite speed $c$, the causality requirement leads to 
+\begin{equation}
+p = 0 \quad \mbox{and} \quad \bm{v} = 0 \quad \mbox{if $r>a + c(t-t_o)$}.
+\end{equation}
+This physical basis of this should be familiar to most readers with a basic knowledge of acoustics; a discussion can be found in the text by Pierce.\citep{PierceAcoustics1}
+
+\medskip
+
+
+Once one has posed a problem to one's tentative satisfaction, one should pay attention to the following dictum:
+
+\begin{theorem}
+When formulating a problem,   make a reasonable attempt to make sure that the formulation is sufficiently complete to guarantee that the problem has a unique solution.
+\end{theorem}
+
+
+One should also ideally make sure that a solution 
+\emph{exists}.  Such, however, is rarely a cause of concern at the outset.  One's intuition in this respect is usually reliable.  Uniqueness, however, is not necessarily obvious.  If one eventually finds a solution, the question of existence becomes moot.  But one can have doubts that the derived solution is the only possible solution.
+
+
+\medskip
+
+\noindent
+{\bf\emph{Energy corollary}}
+
+\medskip
+
+
+For the generic problem just posed, uniqueness follows from consideration of the energy corollary of the governing equations, this being
+\begin{equation} \label{energy_corollary}
+\frac{d}{dt}\int \left\{ { \frac{ 1}{ 2}}\rho v^2 +  { \frac{ 1}{ 2}} \frac{p^2}{\rho c^2}\right\}dV = - \int p \bm{v}\bm{\cdot} \bm{n} dS.
+\end{equation}
+Here the integration on the left extends over any closed volume in the medium (Fig. 2), and the integration on the right extends over the surface enclosing the volume, with $\bm{n}$ denoting the unit normal vector pointing out of the surface.  
+
+\medskip
+
+ 
+
+For the application of this  energy corollary to the geometry of the example, one considers a volume   in the region $y\ge0$, with boundary surfaces  at $y=0, |x| > a$, at  $r = a$, and at $r = r_{{}_L}$, where $r_{{}_L}$ (with subscript $L$ denoting ``large'') is an arbitrary large radius selected so that $r_{{}_L}>
+a + c(t-t_o)$.  (See Fig. 3.   The volume is taken as having unit width in the z-direction.)  A suitable manipulation of the boundary conditions allows the above equation to be expressed
+\begin{equation} 
+\frac{d E}{dt}  =  V(t) F_{c,m}(t),
+\end{equation}
+where 
+\begin{equation} \label{powerinput}
+E = \int_o^\pi \int_a^{r_{{}_L}}\left\{ { \frac{ 1}{ 2}}\rho v^2 +    \frac{p^2}{2\rho c^2}\right\}r dr d\theta 
++ 2\int_a^{r_{{}_L} }\left\{\frac{1}{2} K_\mathrm{sp} \eta_\mathrm{in}^2 \right\} dr
+\end{equation}
+represents the sum of the energy (per unit length in the z-direction)  distributed throughout the volume and the energy concentrated near the surface of the wall (on both sides of the cylinder).  The right side of Eq. (\ref{powerinput})  is the power input by the oscillating cylinder to the external medium., and comes from  an integration over the cylinder surface, where  $\bm{n} =
+ - \bm{e}_r$.  The quantity
+ \begin{equation}
+F_{c,m}(t) = - \int_o^\pi  p(a, \theta, t) ( \bm{e}_y\bm{\cdot}\bm{e}_r) a d\theta 
+\end{equation}
+is the net force in the  $y$-direction (and per unit length in the $z$-direction) exerted by the cylinder on the neighboring medium.  With the definition of the angle $\theta$ depicted in Fig. 1, the dot product is recognized as
+\begin{equation}
+\bm{e}_y\bm{\cdot}\bm{e}_r = \sin \theta.
+\end{equation}
+
+\medskip
+
+\noindent
+{\bf\emph{Proof of uniqueness}}
+
+\medskip
+
+To prove uniqueness, one hypothesizes that there are two solutions, denoted by subscripts $1$ and $2$.  Then the differences, $p_2 - p_1$, $\bm{v}_2 - \bm{v}_1$,  and $\eta_{\mathrm{in}, 2} -\eta_{\mathrm{in}, 1}$ of the two solutions will satisfy the same partial differential equations and the same boundary condition at the wall. However, in regard to the boundary condition at the surface of the cylinder, one will have  
+\begin{equation}
+\left[\bm{v}_2- \bm{v}_1 \right]\bm{\cdot }\bm{e}_r = 0  \quad \mbox{at $r =a$}.
+\end{equation}
+The same steps that led to the energy corollary  then lead to
+\begin{equation}
+\frac{d}{dt}\int_o^\pi \int_a^{r_{{}_L}}\left\{ { \frac{ 1}{ 2}}\rho \left( \bm{v}_2 - \bm{v}_1\right)\bm{\cdot}  \left( \bm{v}_2 - \bm{v}_1\right)    +   \frac{1}{2\rho c^2}\left( p_2 - p_1\right)^2 \right\} r dr d\theta 
+\nonumber
+\end{equation}
+\begin{equation}
++  2\frac{d}{dt}\int_a^{r_{{}_L} }\left\{\frac{1}{2} K_\mathrm{sp}\left(\eta_{\mathrm{in}, 2} -\eta_{\mathrm{in}, 1}\right)^2 \right\} dr = 0
+\end{equation}
+Because there is no  disturbance before the initial excitation time and because the time derivative is zero, one concludes that the sum of the two integrals is identically zero for all times.  Then, because all terms in the integrands are everywhere positive,  each term is everywhere zero.  The two solutions are consequently the same.  The proof given here (but without the spring-like boundary condition included) dates back to Gauss and to Kirchhoff.\citep{Kirchhoff}
+
+
+\medskip
+
+\subsection{Free-surface, with gravity; an alternate interpretation}
+
+\medskip
+
+
+The generic model described above applies in particular to the special case of a floating, half-submerged, cylinder on the surface of a body of a fluid (say, water) under the influence of gravity.   (This example is representative of the design of the Pelamis\citep{Thiam} ocean-wave energy conversion device.) The formulation remains the same, but the spring constant  is identified as
+\begin{equation} \label{gravityspringconstant}
+K_\mathrm{sp} = \rho g
+\end{equation}
+Here $\rho$ is the ambient density of the water and $g$ is the acceleration associated with gravity.   The quantity $\eta_{in}$, which was previously interpreted as the inward displacement of a compliant wall, is reinterpreted as
+$\eta$, the wave-induced vertical displacement of the  water surface, nominally at $y=0$. (See Fig. 4.)
+
+\medskip
+
+
+To explain how such an interpretation arises, one proceeds from the full nonlinear equations of fluid dynamics with the gravitational body force included.  The total pressure in the fluid is written as $p_T = p_o + p$.  
+Euler's equation including gravity is
+\begin{equation}
+\rho_T\left[ \frac{\partial \bm{v} }{\partial t} +\left( \bm{v}\bm{\cdot}\bm{\nabla}\right) \bm{v}\right] = - \bm{\nabla} p_T +\rho_T g \bm{e}_y.
+\end{equation}
+This holds for $y>-\eta$.  At the surface, the pressure is some constant $p_{o,S}$ and this is independent of time.  (The pressure in the air above the ocean surface is nearly unchanged by the heaving up and down of the surface, because of the large disparity between the densities of air and water.) The zeroth-order equation results with all first-order quantities set to zero, and yields
+\begin{equation}
+p_o(y) = p_{o,S} + \rho  g y,   
+\end{equation}
+where this is for $y > 0$. (Here $\rho$ is the ambient density of the fluid.)  If $y<0$, the zeroth order pressure is $p_{o,S}$.  Next, one asks what is the total pressure at some small depth $\epsilon$ which is greater than $|\eta|$.  This is 
+\begin{equation}
+p_T(\epsilon) = p_{o,S}  + \rho g \epsilon + p(\epsilon).
+\end{equation}
+The perturbation pressure $p$ is a function of the Eulerian coordinate $y$ and is expected to be an analytic function of this coordinate for $y\ge 0$, so is possible to think of $p(0)$, even when $\eta$ might be negative.  Since the quantity $p$ is already a first order quantity, one can rewrite the above equation, to first order as
+\begin{equation}
+p_T(\epsilon) = p_{o,S}  + \rho  g \epsilon + p(0).
+\end{equation}
+The boundary condition at the actual surface is
+\begin{equation}
+p_T(-\eta) = p_{o,S}  ,
+\end{equation}
+so the first-order boundary condition becomes
+\begin{equation}
+0 =-  \rho  g \eta + p(0).
+\end{equation}
+This, in the linear approximation, holds for all $t$ and for all $x$
+for which  $|x| > a$.  Thus, in this approximation, one has
+\begin{equation}
+p = \rho g  \eta \qquad \mathrm{at} \quad y=0 \quad \mathrm{and} \quad |x| >a,
+\end{equation}
+which is of the same form as  Eq. (\ref{surfaceboundarycondition}).
+
+
+\medskip
+
+
+In underwater acoustics, the boundary condition at the upper surface of the ocean is normally taken as $p=0$, the surface being idealized as a ``pressure-release'' surface.  Such  is all right for higher frequencies and for points not in the immediate vicinity of floating bodies.  The formulation here allows some explicit accounting for the effects of gravity.  It also allows the consideration of ``water waves'' or ``gravity waves,'' which are waves that travel along the surface of the water and which depend intrinsically on the forces associated with gravity. In the usual accounts of such waves,\citep{Rayleigh_sound_water}${}^,$\citep{Lindsay} the water is taken as incompressible, so that $\bm{\nabla}\bm{\cdot}\bm{v} = 0$, and the speed of sound is effectively infinite.  However, even if one were solely concerned with the excitation of such waves and of their effects on the oscillating cylinder, there is some merit in taking the finite speed of sound into account, as doing so allows some avoidance of mathematical ambiguities.  This is explained further below, and what is subsequently done is in accord with the following dictum:
+
+\medskip
+
+
+
+ \begin{theorem}  
+If you are at an impasse for  imposing a workable causality condition, you should modify the problem so that such is possible, with the introduction of a small parameter that can subsequently be set to zero.
+\end{theorem}
+
+\medskip
+
+
+For the analysis of water waves generated by a heaving cylinder, the appropriate small parameter is the reciprocal of the sound speed.  Letting the parameter go to zero simply means letting the sound speed go to infinity. 
+
+  \medskip  
+
+A notable instance where this artifice was ``used'' is in the classic 1948 paper\citep{Levine} on the radiation of sound from an unflanged circular pipe by Levine and Schwinger.  A major unsolved problem\citep{RayleighResonance} up to that time was   the determination of the end correction of a pipe with an open end.  Ideally, that problem requires only the solution of Laplace's equation, but the problem appeared to be intractable analytically.  Levine and Schwinger solved the problem by considering the fluid as being compressible (so that sound waves were involved) and then taking a limit.
+
+\medskip
+
+With this artifice, one should have reasonable confidence that the disturbance is going to be identically zero at all radial distances greater than $a + c(t-t_o)$, even though $c$ is a very large number.   
+
+ 
+\section{FORMULATION FOR FIXED FREQUENCY}
+
+
+\begin{theorem}
+After the transient problem is formulated satisfactorily, limit your considerations, at least initially, to the constant frequency case, unless the general solution for the transient problem seems a priori easy, or unless your interest is in the early time history of the transient solution.
+\end{theorem}
+
+\noindent
+{\bf\emph{Introduction of complex amplitudes}}
+
+\medskip
+
+One considers that the cylinder has been caused (by presently undisclosed external forces) to start to oscillate at some time in the remote past, so that it eventually oscillates at some fixed angular frequency $\omega$, and
+\begin{equation}
+V(t) \to  V_o \cos \omega t = \mathrm{Re}\{ V_o e^{-i\omega t}\}, \qquad
+Y_c(t) \to \frac{V_o}{\omega}\sin \omega t = \mathrm{Re}\{ i[V_o/\omega] e^{-i\omega t}\}.
+\end{equation} 
+The quantity $Y_c(t)$ is the downward displacement (in $y$-direction) of the center of the cylinder, and $V(t)$ is its time derivative.  The time origin is selected so that the phase of the cylinder's downward velocity is zero at $t=0$, and the velocity amplitude $V_o$ is a ``small'' positive number (in accordance with the linearization approximation) compared with $c$ and $\omega a$.  The use of the time dependence $e^{-i\omega t}$  (rather than $e^{i\omega t}$ or $e^{j\omega t}$) is a matter of taste, but the choice is traditional among many workers concerned with wave propagation problems.\citep{Bouwkamp}  (It is also the de facto choice invariably made in the derivation of the time-dependent Schroedinger equation in quantum mechanics.)
+
+\medskip
+
+One adopts the premise that, at the times of interest, possibly long after the initial excitation, all transients in the regions of interest in the medium have died out  and the fields in the medium are also oscillating with the same angular frequency $\omega$, so that 
+\begin{equation} \label{complexamplitudes}
+p(x,y,t) \to \mathrm{Re} \left\{ \hat p(x,y, \omega) e^{-i\omega t}\right\},\end{equation}
+where $\hat p$ is a complex number (a complex amplitude), the components of which depend on the spatial coordinates, but not on time.  
+
+\begin{theorem}
+When addressing problems of constant frequency vibration, always cast the problem in terms of complex amplitudes.
+\end{theorem}
+
+The general idea of using complex amplitudes goes back to Rayleigh's\citep{RayleighComplex} \emph{Theory of Sound}.
+
+
+Given the premise of Eq. (\ref{complexamplitudes}), the equations stated previously for the transient problem lead to the Helmholtz equation,
+\begin{equation}
+\nabla^2 \hat p + k_\mathrm{ac}^2 \hat p = 0, \qquad \nabla^2 \hat p + \tilde k_\mathrm{ac}^2 \hat p = 0,
+\end{equation}
+where
+\begin{equation}
+k_\mathrm{ac} = \frac{\omega}{c}, \qquad \tilde k_\mathrm{ac}^2 =
+\frac{\omega(\omega + i\nu_\mathrm{art})}{c^2}.
+\end{equation}
+The quantity  $k_\mathrm{ac}$ is the acoustic wave number,.  The latter version of the Helmholtz equation is what results when the artificial damping is included in the linearized Euler equation.  (Over-tildes are here used to denote complex quantities that incorporate the artificial damping.)
+
+
+  The boundary condition, Eq. (\ref{cylinder_boundary_condition}), at the surface of the oscillating cylinder becomes 
+\begin{equation}
+\frac{\partial \hat p}{\partial r} =  i\omega \rho V_o \sin\theta \quad \mbox{at $r=a$}.
+\end{equation}
+and the boundary condition at the interface ($y=0$) becomes
+\begin{equation}  \label{surfacewaveboundarycondition}
+\frac{\partial \hat p}{\partial y} +  k_\mathrm{surf} \hat p= 0, \quad \mbox{or} \quad
+\frac{\partial \hat p}{\partial y} + \tilde k_\mathrm{surf} \hat p= 0,
+  \quad \mbox{at $y=0$, and for $|x|>a$},
+\end{equation}
+where 
+\begin{equation}
+k_\mathrm{surf} = \omega^2\frac{\rho}{K_\mathrm{sp}}, \qquad \tilde k_\mathrm{surf} = \omega(\omega + i \nu_\mathrm{art})\frac{\rho}{K_\mathrm{sp}}.
+\end{equation}
+The quantity $k_\mathrm{surf}$ is the wave number  ($2\pi$ divided by the wavelength) for surface waves of constant frequency $\omega$ moving over the surface in the limit when the medium is idealized as being incompressible and unbounded in the coordinate $y$.  The second version, a complex number, takes into account the artificial damping in the linearized Euler equation.  If the surface is the free surface of a body of water, then one replaces $\rho/K_\mathrm{sp}$ by $1/g$.  (It is understood that one uses the version that includes artificial viscosity only when such is needed to resolve mathematical ambiguities, and that one eventually takes the limit as $\nu_\mathrm{art} \to 0$.)
+
+\medskip
+
+\noindent
+{\bf\emph{Causality and Fourier transforms}}
+
+\medskip
+
+
+The causality condition is not trivial to apply when one seeks to solve a problem involving a fixed frequency.  Ideally, one should consider $\hat p$ as a Fourier transform\citep{Fourier} of a transient function (zero before some time $t_o$),  with $V_o$ being replaced by $\hat V(\omega)$, this being the Fourier transform of $V(t)$.  The inverse transform
+\begin{equation}
+p(x, y, t) =  \int_{-\infty}^{\infty} \hat p(x,y, \omega) e^{-i\omega t} d\omega
+\end{equation}
+is required to exist and to vanish identically at all times $t$ less that that time $t_o$ at which $V(t)$ first becomes nonzero.   A necessary requirement,\citep{Toll}${}^,$\citep{Nussenzveig} for this vanishing before initial excitation, is (Fig. 5) that the function $\hat p$, considered as a function of the complex variable $\omega$, should be free of singularities, such as poles and branch-cuts, in the upper half-plane and that it should go to zero as $\omega_I \to \infty $ sufficiently rapidly that the contour can be closed with a semi-circle at $|\omega|\to \infty$.  Cauchy's theorem would then give $p = 0$ if $t<t_o$.  (The definition of the inverse Fourier transform varies in the literature, with various different constants preceding the integral sign in the above.  The deductions here are independent of the choice.)
+
+\medskip
+
+\noindent
+{\bf\emph{Closing the contour at infinity}}
+
+\medskip
+
+The actual evaluation of the inverse Fourier transform so as to get $0$ before time of excitation requires that the integration over the semi-circle at large $|\omega|$ vanish as the radius $|\omega|$ goes to infinity.  For this to be so, it is necessary that, over almost all of the semi-circle, the magnitude of the function goes to zero as $|\omega|\to\infty$  faster than $1/|\omega|^2$.   This is certainly satisfied, for $t<0$, by the factor $e^{-i\omega t}$ in the integrand.  As for the factor that corresponds to the Fourier transform,   it often happens that, as one proceeds to solve the problem   for arbitrary, but nonzero, $\omega$, the solution along a radial line from the source region approaches the form
+\begin{equation}
+\hat p \to \sum_n \left[A_n(R, \theta, \omega) e^{i K_n(\theta,\omega) R} 
++ B_n(R, \theta,\omega) e^{-iK_n(\theta,\omega) R}\right],
+\end{equation}
+where the $A_n$ and $B_n$ are slowly varying functions of the radial distance $R$ (compared with the exponentials at moderate values of  $R$).  The implied sum over some integer $n$ is  in accord with the recognition that, for some problems, there may be more than one possible wave number function $K_n$, and the wavenumber functions are not necessarily real for real $\omega$.    The issue, when constructing the constant frequency solution,  is typically just which of the two terms does one keep for a given $n$.  In this regard, given that whatever waves are being generated are either propagating away from the source or dying out with increasing distance from the source, it is sufficient to resolve the issue by looking at the Fourier transform in the limit of large $R$.
+
+
+\medskip
+
+If $\omega$ is allowed to have a small positive imaginary part, so that 
+\begin{equation}
+\omega \to \omega + i s,
+\end{equation}
+then
+\begin{equation}
+i K_n(\omega)R \to i K_nR - \left(\frac{dK_n}{d\omega}\right)sR.
+\end{equation}
+Consequently, given a finite positive value for s, one observes that, as $R\to \infty$,  one of the terms for a given $n$ tends to go to $\infty$, and the other term tends to go to zero.   Just which term does which depends on the sign of the real part of the derivative $dK/d\omega$. If one is to successfully close the contour in the upper half-plane, it is evident that one must  retain only the term that goes to zero.  (The Sommerfeld radiation condition,\citep{Sommerfeld} which is often mentioned in the literature, has a some restricted range of validity, and it is here suggested that thinking in terms of causality and inverse Fourier transforms has greater applicability.  In particular, the usual statements of the Sommerfeld radiation condition do not take into consideration boundary conditions of the type in Eq. (\ref{surfacewaveboundarycondition}).)
+
+ \begin{theorem}
+If the medium is unbounded, use the tentative causality requirement that, when the frequency is allowed to have a small positive imaginary part, the solution at large radial distances must go exponentially to zero.
+\end{theorem}
+
+The wording of this dictum assumes one is using the $e^{-i\omega t}$ time-dependence formulation with complex amplitudes.
+
+\medskip
+
+\noindent
+{\bf\emph{Parameter regimes}}
+
+\medskip
+
+
+\begin{theorem}
+Before going into any details on the actual solution of a general problem, list all the input parameters and decide whether there are any special circumstances for which one might initially find a solution.
+\end{theorem}
+
+The parameters that enter into the posing of the generic problem introduced above are (1) the radius $a$ of the cylinder, (2) the angular frequency $\omega$, (3) the ambient density $\rho$ of the fluid, (4) the sound speed $c$ in the fluid, (5) the spring constant $K_\mathrm{sp} $ of the wall, and (6) the velocity amplitude $V_o$ of the oscillating cylinder.    Alternately, when the circumstances correspond to the heaving under gravity of a cylinder on the free surface of a body of water under  the influence of gravity, the fifth item is replaced by (5${}^\prime$) the acceleration $g$ associated with gravity.  Because the problem, as posed, is linear, all predicted amplitudes will be proportional to $V_o$, so there is little interest in delineating special circumstances that involve different regimes for $V_o$.
+
+
+
+\medskip
+
+One notes that, from the remaining constants, one can form two quantities that have the units of frequency:
+\begin{equation}
+\omega_\mathrm{ac} = \frac{c}{a}; \qquad \omega_\mathrm{surf} = \left(\frac{K_\mathrm{sp}}{\rho a}\right)^{1/2}.
+\end{equation}
+For the case when the wall is replaced by the upper surface of a body of water (ocean), the latter is replaced by
+\begin{equation}
+\omega_\mathrm{surf} = \left(\frac{g}{a}\right)^{1/2}.
+\end{equation}
+The ratio of these two characteristic frequencies yields the dimensionless number
+\begin{equation} \label{chinumber}
+\chi = \left(\frac{K_\mathrm{sp} a}{\rho c^2} \right)^{1/2}  = \left(\frac{g a}{c^2} \right)^{1/2}
+\end{equation}
+where the latter version is in terms of symbols applicable to the ocean surface case.  
+
+
+\medskip
+
+One can readily distinguish two  limiting circumstances that may be of interest. One is that when the baffle is a rigid wall, and the  speed of sound is finite, so that $K_\mathrm{sp} \rightarrow \infty$ and $\chi \rightarrow \infty$.   The other is when the surface is a free surface under gravity, and when the fluid is idealized as incompressible, so that $c \rightarrow \infty$ and $\chi \rightarrow
+0$.  
+
+\medskip
+
+At this point, one should make a decision as to whether one should first work out the solution for these two limiting cases or try to develop a solution for arbitrary $\chi$.  The obvious answer is to tackle the limiting cases first, and the reader is encouraged to try to do this.  However, insofar as that the present paper is a journal article and space is somewhat at a premium, one can also wonder if it is not too much more difficult to carry through the solution for arbitrary $\chi$.  If one senses that this is possible,  then perhaps one can at least try to do this, and then fall back on the limiting cases if and when the analysis seems to become unwieldy.
+
+\medskip
+
+
+In actuality, the limiting case  of $\chi \rightarrow 0 $ cannot be solved directly (or such is the considered opinion of the current authors), and the simplest apparent method of finding the solution  in this limit is   to work through the solution for finite $\chi$ and then subsequently take the limit.   
+
+
+ 
+\medskip
+
+
+\noindent
+{\bf\emph{Use of dimensionless variables}}
+
+\medskip
+
+
+\begin{theorem}
+If feasible, and certainly before attempting to find a solution in some limiting circumstances, recast all of the governing equations  in a dimensionless form.  
+\end{theorem}
+
+\medskip
+
+In any work on the analytic solution of a somewhat complicated problem, there is often a considerable risk that the intermediate expressions will become increasingly cumbersome. The overall written analysis can take on an increasingly baroque appearance, and even the author can find it difficult to trace back through the steps to check the work.  Working with dimensionless  symbols is one way of reducing the baroque.
+
+For the generic problem at hand,  appropriate dimensionless statements are  
+\begin{equation}
+\hat{\bm{v}} = V_o \bm{\Psi}(\epsilon_1, \epsilon_2,
+\xi, \theta),
+\end{equation}
+\begin{equation}  \label{introduction_of_psi}
+\hat p = i \omega \rho a V_o \psi(\epsilon_1, \epsilon_2,
+\xi, \theta),
+\end{equation}
+\begin{equation}
+\bm{\Psi} =  \bm{e}_r \frac{\partial \psi}{\partial \xi} 
++ \bm{e}_\theta \frac{1}{\xi}\frac{\partial \psi}{\partial \theta},
+\end{equation}
+\begin{equation}
+\frac{\partial^2 \psi}{\partial \xi^2} + \frac{1}{\xi} \frac{\partial  \psi}{\partial \xi } + \frac{1}{\xi^2 }\frac{\partial^2 \psi}{\partial \theta^2}
++\epsilon_1^2 \psi = 0,
+\end{equation}
+\begin{equation}
+\frac{\partial \psi}{\partial\xi} = \sin\theta \quad \mbox{at $\xi = 1$},
+\end{equation}
+with the abbreviations $\epsilon_1 = k_\mathrm{ac} a$, $\epsilon_2 = 
+k_\mathrm{surf} a$, and $\xi = r/a$.
+The boundary condition  at the surface $y=0$ takes the form
+  \begin{equation}
+\frac{\partial \psi}{\partial (y/a)} + \epsilon_2 \psi = 0  \quad \mbox{ at $y=0$, and for $x/a > 1$}.
+\end{equation}
+or, equivalently, 
+  \begin{equation}
+\frac{\partial \psi}{\partial\theta} + \xi\epsilon_2 \psi = 0  \quad \mbox{ at $\theta=0$, and for $\xi > 1$}.
+\end{equation}
+An analogous relation holds for the boundary condition at  $\theta = \pi$ and  for $\xi>1$.
+
+\medskip
+
+   
+
+\section{INNER SOLUTION}
+
+
+The method used here for solving the generic problem in the low-frequency limit is what is currently called the \emph{method of matched asymptotic expansions}, sometimes abbreviated \emph{MAE}.\citep{Lesser} One can discern that the method was used as early as the late 1800's by Rayleigh,\citep{RayleighApertures}${}^,$\citep{RayleighSlits} and it is often tacitly used in contemporary papers without explicit identification of the  method as being MAE.  Most of the recent applications are to fields other than acoustics.  Notable examples of the application of the method to acoustics can be found in  papers by Thompson,\citep{Thompson} 
+by Martin and Dalrymple,\citep{Martin} and by Pierce.\citep{PierceDisappearing}   
+
+\begin{theorem}
+So that you might be able to communicate with some of your contemporaries, familiarize yourself with whatever relevant buzz-words, vogue terms, jargon, and acronyms are used in current literature, but maintain a healthy suspicion that the basic ideas are of much older vintage.
+\end{theorem}
+
+\medskip 
+
+
+In the  context of the generic problem in the present paper, a principal premise is that the two dimensionless parameters, $\epsilon_1 = k_\mathrm{ac} a$ and 
+$\epsilon_2 = k_\mathrm{surf} a$, are both considered arbitrarily small.  Two distinct regions (Fig. 6) are distinguished: the first (inner region) is the region close to the oscillating cylinder where $\xi = r/a$, $x/a$, and $y/a$ (inner variables) are considered to be of the order of unity.   The second region is that where either $k_\mathrm{ac}r $ or $k_\mathrm{surf}r$ (outer variables) is of order unity.   The term ``order of'' is used loosely; any dimensionless quantity that is of order of unity is presumed to be much greater than, say, $\epsilon_1$ or $\epsilon_2$, but also much less than the reciprocals of these dimensionless quantities. 
+
+\medskip 
+
+One attractive feature of limiting one's attention initially to the  low frequency limit is that one can find a fairly general solution (inner solution) for the inner region for which there are a few unknown parameters.  Comparable simplicity results for the first approximation to the solution (outer solution) for the outer region. These solutions will not necessarily have the same formal appearance, but  they will have some common approximate functional dependence (match) in some intermediate (matching) region, providing the a priori unknown parameters are selected appropriately.  
+
+\medskip
+
+ 
+\noindent
+{\bf\emph{First approximation to inner solution}}
+
+\medskip
+
+
+\begin{theorem}
+For the ``first approximate'' version of the inner solution, examine the problem formulation expressed in terms of the inner variables and identify dimensionless parameters that vanish as the frequency goes to zero.  Set all such parameters to zero. 
+\end{theorem}
+
+Following this dictum, one uses $\psi_{1, \mathrm{in}}$ for the so-called first approximate version for the dimensionless pressure, and derives
+\begin{equation}
+\frac{\partial^2 \psi_{1, \mathrm{in}}}{\partial \xi^2} + \frac{1}{\xi} \frac{\partial  \psi_{1, \mathrm{in}}}{\partial \xi } + \frac{1}{\xi^2 }\frac{\partial^2 \psi_{1, \mathrm{in}}}{\partial \theta^2}
+ = 0,
+\end{equation}
+\begin{equation}
+\frac{\partial \psi_{1, \mathrm{in}}}{\partial \xi} = \sin\theta \quad \mbox{at $\xi= 1$},
+\end{equation}
+\begin{equation}
+\frac{\partial \psi_{1, \mathrm{in}}}{\partial \theta} = 0 \quad
+\mbox{at $\theta = 0 $ and at $\theta = \pi$},
+\end{equation}
+the partial differential equation being recognized as Laplace's equation.
+Note that there is not necessarily any assumption as to  this function
+$\psi_{1, \mathrm{in}}$ being independent of frequency.  This inner solution problem is not fully posed, and its solution is not unique.  
+
+\medskip
+
+  
+\noindent
+{\bf\emph{Hypothesized inner solution}}
+
+\medskip
+
+
+To select a sufficiently complete solution of the boundary value for the quantity $\psi_{1, \mathrm{in}}$, one first ignores the boundary condition at $\xi = 1$ ($r=a$),  and notes that particular solutions\citep{LaplaceEquation} that satisfy the partial differential equation (Laplace's equation) and the boundary conditions at $\theta = 0$ and $\theta = \pi$ are: (i) any constant,
+(ii) a constant times $\ln\xi$, (iii) a constant times $\xi^{2n}\cos 2n\theta$, and (iv) a constant times $\xi^{-2n}\cos 2n$, wnere $n$ is any positive integer.  One seeks to write the general solution as a linear combination of these quantities.  As to what terms to include, the following dictum is given:
+
+\begin{theorem}
+One can anticipate that the matching requirements will be consistent to some first approximation with the requirement that the ``first approximate'' solution for the inner solution has the least singular admissible behavior in terms of its it behavior with regard to the distance from the center of the inner region.
+ \end{theorem}
+ 
+ The term ``admissible behavior'' is here used loosely to rule out any behavior which does not seem plausible.
+ 
+ \medskip
+
+This dictum rules out terms such as  $\xi^{2n}\cos 2n\theta$ for $n\ge1$.  This should seem plausible to most readers, because the fluid velocity fluctuation would not be expected to grow with increasing radial distance from the source (the oscillating cylinder) for the total solution, and one hopes that the inner solution  be valid up through the matching region.  However,  one does not rule out the logarithm term.  This  may seem surprising, but such a term does not lead to a growth of fluid velocity with distance, and one must wait to see what the matching process leads to.  (This dictum is in accord with Van Dyke's\citep{minimum} \emph{principle of minimum singularity}.)  One hypothesizes that
+\begin{equation}
+ \psi_{1, \mathrm{in}} = A + B\ln \xi + \sum_{n=1}^\infty
+ C_n \xi^{-2n} \cos2 n \theta,
+ \end{equation}
+ where all of the coefficients are possibly frequency-dependent.
+ 
+\medskip
+
+  
+\noindent
+{\bf\emph{Identification of Fourier coefficients}}
+
+\medskip
+
+ 
+ The boundary condition at the cylinder surface yields
+ \begin{equation}
+ B -  \sum_{n=1}^\infty 2n C_n \cos 2n\theta  = \sin \theta,
+ \end{equation}
+ which is recognized as a Fourier series.  The set of functions $\cos 2n\theta $ ($n=0,1,2,\ldots$) are recognized as a complete set of orthogonal functions for representation\citep{FourierSeries} of functions defined on the interval [$0,\pi/2$] that have zero derivative at $\theta = \pi/2$.  The series isn't expected to converge exactly at $\theta =0 $, but it should converge eventually for small but nonzero values of $\theta$.  The coefficients are derived as follows: \begin{equation}
+(\pi/2) B = \int_o^{\pi/2} \sin \theta d\theta = 1,\qquad \qquad\qquad \qquad
+\qquad\qquad
+\end{equation}
+\begin{equation}
+ - (\pi/4) 2n C_n = \int_o^{\pi/2} \cos 2n\theta \sin\theta d\theta \qquad\qquad
+ \qquad\qquad\qquad\qquad
+\nonumber
+\end{equation}
+\begin{equation}
+ \qquad= \frac{1}{2}\int_o^{\pi/2} \left[\sin(1 -2n) \theta + \sin(1+2n) \theta \right]
+d\theta
+\nonumber
+\end{equation}
+\begin{equation}
+ \qquad = \frac{1}{2}\left[ \frac{1}{1-2n} + \frac{1}{1+2n}\right]
+= - \frac{1}{[(2n)^2 -1] } .
+\end{equation}
+Thus one has
+ \begin{equation}
+ \psi_{1, \mathrm{in}} = A + \frac{2}{\pi}\ln(r/a) +\frac{2}{\pi}\sum_{n=1}^\infty
+\frac{(a/r)^{2n}}{n[(2n)^2 -1]}  \cos2 n \theta.
+ \end{equation}
+The only constant that remains to be determined in this expression is the constant $A$, which may possibly depend on frequency (or on $\epsilon_1$ or $\epsilon_2$).
+
+\medskip
+
+  
+\noindent
+{\bf\emph{Outer expansion of inner solution}}
+
+\medskip
+
+To prepare\citep{VanDyke}${}^,$\citep{CrightonBookChapter} for matching with the outer solution, one recasts the inner solution derived above in terms of $w = kr$ and $\epsilon$.  Here $k$ is one or the other of the two wave numbers, and $\epsilon = ka$.  With such a recasting, one has $\xi = w/\epsilon$, $\ln \xi =\ln w - \ln \epsilon$, so that
+ \begin{equation} \label{outer_of_inner}
+ \psi_{1, \mathrm{in}} = A - \frac{2}{\pi} \ln\epsilon  + \frac{2}{\pi} \ln kr  +\frac{2}{\pi}\sum_{n=1}^\infty
+\frac{\epsilon^{2n}  (1/kr)^{2n}}{n[(2n)^2 -1]} \cos2 n \theta.
+ \end{equation}
+This expression can be termed the outer expansion of the first approximation to the inner solution, expressed in terms of the outer variable $w= kr$.
+
+
+
+\section{OUTER SOLUTION, RIGID-BAFFLE LIMIT}
+
+\medskip
+
+
+To determine a suitable candidate for the outer solution, one begins by ignoring the boundary condition at the surface of the cylinder, and seeks a solution of the Helmholtz equation that describes   propagation out from the general vicinity of the origin and which  satisfies the appropriate boundary condition   at the plane $y=0$.  It also must satisfy a suitable version of the causality condition in the limit of large $r$. 
+
+\medskip
+
+
+The working out of the outer solution for arbitrary values of the parameter $\chi$ given in Eq. (\ref{chinumber}) is somewhat nontrivial, and the consideration of the case, $\chi\rightarrow \infty$, allows an introduction of some relevant mathematical concepts.  This is the case when the spring constant for the wall is infinite, so that the cylinder is in  a slot within a rigid baffle.  In this limiting case, the boundary condition for the outer solution is that the normal derivative vanishes at the wall.  
+
+\medskip
+  
+\noindent
+{\bf\emph{Use of superposition}}
+
+\medskip The lack of an explicit dependence on the coordinate $\theta$ in this boundary condition  for the outer solution suggests that  the appropriate solution, in the first approximation, would be independent of the angle $\theta$.  Since, in spherical coordinates, the radiation from a point source\citep{RayleighPointSource} is given by
+\begin{equation}
+\hat p_\mathrm{sp} =K \frac{1}{R}e^{ik_\mathrm{ac} R },
+\end{equation}
+where $K$ is a constant characterizing the source, and
+where $R$ is radial distance (spherical coordinates) from the source, one can anticipate that the appropriate outer solution, to some first approximation,\citep{RayleighPointLine}${}^,$\citep{LeviCivita}${}^,$\citep{Lamb2D} is a $z$-independent linear superposition (Fig. 7) of such solutions, so one writes
+\begin{equation}
+\psi_{1,\mathrm{out}} = D \int_{-\infty}^{\infty} \frac{1}{R}e^{ik_\mathrm{ac} R } dz_o,
+\end{equation} 
+where here
+\begin{equation}
+R = \left[r^2 + (z-z_o)^2\right]^{1/2}.
+\end{equation}
+The quantity $D$ is some function of $\epsilon_1 = k_\mathrm{ac} a$, which can be determined during the matching process.   (One can easily verify that the integral above is independent of the out-of-plane coordinate $z$.  Dimensionless coordinates offer no special convenience in this phase of the analysis, so they are not being used here.)
+
+\medskip
+
+At this point, one may wonder if the proffered integral exists, and such should be a natural question that one would ask during the course of solving a problem in mathematical acoustics.
+
+\begin{theorem}
+If, in the course of carrying out an analysis, an integral expression emerges, one should check to make sure that the integral exists.  If the integrand has singularities, one should make sure that these are integrable singularities.   If the limits are infinite, one should make sure that the integral converges.  If the existence is ambiguous, as would be the case were there poles on the integration path, one must define the integral so that the ambiguity disappears.  
+\end{theorem}
+
+In the present case there are no singularities in the integrand for finite $r$.  The integral is not absolutely convergent, but one can readily convince oneself that it is indeed convergent.   The proof is analogous to the proof\citep{CourantDirichlet} that the infinite integral (the Dirichlet integral) over $(1/x)\sin x$ is convergent.
+
+\medskip
+
+  
+\noindent
+{\bf\emph{The Hankel function}}
+
+\medskip
+
+The integral that appears above can, after some effort and after consultation of reference books, be identified\citep{Watson}${}^,$\citep{MorseFeshbachHankel} as $i\pi H_{o}^{(1)}(k_\mathrm{ac} r)$, where the function $H_{o}^{(1)}$ is the Hankel function of the first kind and of zeroth order, so that
+ \begin{equation} \label{rigidbaffleouter}
+\psi_{1,\mathrm{out}} = i\pi D H_{o}^{(1)}(k_\mathrm{ac} r)
+ \end{equation} 
+ (Actually, this  expression for the Hankel function does not usually appear explicitly in reference books. What one has to do is to make an appropriate change of integration variable, such as described further below, and then search reference books for integral expressions that are of similar form.)  Once the identification is recognized, one can extract relevant mathematical properties from various reference books, but for what should be obvious pedagogical reasons, the use of formulas cribbed from reference books is avoided in the present paper.  If one were writing an article for a journal, brevity would perhaps dictate that some formulas be given without derivation, the authors supplying a reference to their source, but the reader would justifiably expect that the authors have independently checked all cited formulas.
+
+
+\begin{theorem}
+Never use a formula from a reference book unless you yourself fully understand the derivation of that formula.
+\end{theorem}
+
+\begin{theorem}
+If you introduce some standard mathematical function into your analysis, make sure the definition that you are using is the same as what is in the standard reference books.
+\end{theorem}
+
+\medskip 
+
+(The definitions and symbol conventions for some functions are different in different books and journal articles.  The generally accepted standard in the present era for such is usually taken to be the \emph{Handbook of Mathematical Functions}\citep{AbramowitzStegun} edited by Abramowitz and Stegun.)
+
+\medskip  
+
+  
+\noindent
+{\bf\emph{Approximation for small argument}}
+
+\medskip
+
+
+The important question at this point is whether this solution can be matched to the previously derived inner solution, so one needs to examine the integral in the limit of small $w = k_\mathrm{ac}r$.  Such an examination was originally carried out by Stokes\citep{Stokes} and is elaborated somewhat by 
+Rayleigh\citep{RayleighStokes} in his \emph{Theory of Sound}, but it is something which persons aspiring to develop skills in mathematical acoustics should be able to work out themselves.  One first changes the integration variable to $u$, where
+\begin{equation}
+\sinh u = \frac{z_o - z}{r}, \qquad R = r \cosh u, \qquad \frac{dz_o}{R} =du,
+\end{equation}
+so that, with account taken that the integrand is even in $u$, one has
+\begin{equation} 
+\psi_{1,\mathrm{out}} =2 D \int_{o}^{\infty}e^{i w \cosh u}
+du,
+\end{equation}
+with the abbreviation $w = k_\mathrm{ac} r$.
+For this version of the integral, the convergence is even more problematical, but one can presume that the rapid oscillations at large $u$ tend to cancel each other, and the limit, as the upper integration limit goes to $\infty$, does exist.  Note that the integral is clearly singular in the limit $w  \to 0$.
+
+\medskip
+
+  
+\noindent
+{\bf\emph{Contour deformation}}
+
+\medskip  
+
+The next step is to deform the integration contour so that the convergence is more apparent and so that the dependence on $w = k_\mathrm{ac}r$ becomes easier to examine.  Because $\cosh( s+i[\pi/2]) = i \sinh s$, and because $(i)( i) \sinh s = - \sinh s$ leads to an exponential that decreases uniformly as $s \to \infty$, the first objective to to lift the contour a distance $\pi/2$ above the real axis (Fig. 8).  One can consequently conceive of an upside-down U-shaped contour that proceeds upwards from the origin to the point $u =i\pi/2$, then proceeds horizontally along a line parallel to the real axis with $u = s + i\pi/2$, from $s= 0$ to some large value $s_\mathrm{max}$, then back down to the real axis, with the limit taken as $s_\mathrm{max} \to \infty$.  
+
+
+\medskip
+
+  
+\noindent
+{\bf\emph{Neglect of contour segment at infinity}}
+
+\medskip
+
+One has to convince oneself that the integral over the third leg vanishes in the limit, and this may not be obvious. The hypothesis is that 
+\begin{equation}
+ \lim_{s_\mathrm{max} \to \infty} I_\mathrm{leg}(s_\mathrm{max})= 0, \qquad
+ I_\mathrm{leg} =
+\int_o^{\pi/2} e^{iw \cosh(s_\mathrm{max} + i \phi)} d\phi. 
+\end{equation}
+ 
+\begin{theorem}
+When seeking an alternate form of an integral by means of contour deformation, make sure that the neglect of any contour segments at infinity is justified.
+\end{theorem}
+
+The justification  follows from
+\begin{equation} \label{leg_neglect_justification}
+\left| I_\mathrm{leg} \right| = \int_o^{\pi/2} e^{- w \sinh s_\mathrm{max} \sin \phi} d\phi <  \int_o^{\pi/2} e^{- [w \sinh s_\mathrm{max}] (2/\pi)  \phi} d\phi,
+\end{equation}
+where the latter inequality results because $(2/\pi)\phi \le \phi$ over the range of integration.  One notes also that   the latter integral vanishes in the limit as $s_\mathrm{max}\to \infty$. [The proof is along the lines of the proof of Jordan's lemma that one finds in the 
+literature.\citep{LeppingtonJordan}  With  a liberal interpretation of the term, the assertion can be regarded as a special case of Jordan's lemma.]
+
+\medskip
+
+  
+\noindent
+{\bf\emph{Expansion in terms of exponential integrals}}
+
+\medskip
+With the elimination of the third leg, the contour integral becomes
+\begin{equation} \label{outerexpressedintegrals}
+\psi_{1,\mathrm{out}} =2 D \left( i I_1+ I_2 \right),
+\end{equation}
+where 
+\begin{equation}
+I_1 = \int_o^{\pi/2} e^{iw \cos \phi} d\phi  \approx  \frac{\pi}{2} + iw  - \frac{\pi}{4}w^2 + \ldots,
+\end{equation}
+\begin{equation}
+ I_2  =  \int_o^\infty e^{-w  \sinh s} ds
+ \end{equation}
+The singular behavior as $w \to 0$
+is concentrated in the second integral $I_2$. 
+
+\medskip
+
+Because the behavior  of $I_2$ at small values of $w$ is difficult to determine and possibly cumbersome, an intermediate step is inserted, so that $I_2$ is expressed in terms of integrals of the intrinsically simpler form
+\begin{equation}
+J_n = \int_{w/2}^\infty \frac{e^{-\alpha}}{\alpha^n} d\alpha,
+\end{equation}
+where $n$ is a positive integer.  These integrals are related to a variant of the exponential integral, defined\citep{AbramowitzExponential} as 
+\begin{equation}
+E_n(z) =  z^{n-1} \int_z^\infty \frac{e^{-\alpha}}{\alpha^n} d\alpha
+\end{equation}
+so that
+\begin{equation}
+J_n = \left( \frac{2}{w}\right)^{n-1} E_n(w/2)
+\end{equation}
+To accomplish the desired intermediate step, the variable of integration in $I_2$ is first changed to $\alpha$, where
+\begin{equation}
+\alpha = (w/2)e^s, \qquad ds = \frac{d\alpha}{\alpha},
+\qquad w\sinh s = \alpha - (w/2)^2/\alpha,
+\end{equation}
+and so that 
+\begin{equation}
+I_2 = \int_{w/2}^\infty \left(\frac{1}{\alpha}\right)e^{-\alpha} \exp({[w/2]^2/\alpha})\, d\alpha.
+\end{equation}
+Expansion of the second exponential in a power series, and interchange of order of summation and integration, then results in
+ the desired form
+ \begin{equation}
+I_2 = \sum_{n=0}^\infty \frac{(w/2)^{2n}}{n!} J_{n+1}.
+\end{equation}
+
+\medskip
+
+These integrals $J_n$ have a convenient recursion property, as can be derived using integration by parts, so that
+ \begin{equation}
+J_n = \frac{1}{n-1}\left[\frac{e^{-w/2}}{(w/2)^{n-1} }-J_{n-1}\right]
+\quad \mbox{if $n \ge 2$},
+\end{equation}
+and this allows one to write
+\begin{equation}
+I_2 =   J_1 + (w/2)^2 \left(\frac{e^{-w/2}}{w/2} - J_1\right)
++ \frac{(w/2)^4}{4}\left( \frac{e^{-w/2}}{(w/2)^2} -
+ \left[\frac{e^{-w/2}}{w/2} - J_1\right]\right) + \cdots,
+\end{equation}
+or
+\begin{equation}
+I_2 = \left(1 -  (w/2)^2 + \frac{1}{4}(w/2)^4 + \cdots\right) J_{1 } + \left( (w/2) + \frac{1}{4}(w/2)^2  +\cdots\right)e^{-w/2}.
+\end{equation}
+For the evaluation of the integral $J_{1,G}$, one notes that
+\begin{equation}
+J_{1 } = \int_{w/2}^\infty \frac{e^{-\alpha}}{\alpha}d\alpha
+= \int_{w/2}^1\frac{1}{\alpha}d\alpha
++\int_{o}^1\frac{e^{-\alpha}-1}{\alpha}d\alpha -
+\int_o^{w/2}\frac{e^{-\alpha}-1}{\alpha}d\alpha +
+\int_1^\infty \frac{e^{-\alpha}}{\alpha}d\alpha.
+\end{equation}
+The first integral is easily expressed as a logarithm, and the second and the fourth are constants, while the third is easily expressed as a power series in $w/2$, so one has
+\begin{equation}\label{J1integral}
+J_{1,G} = -\ln(w/2) - \gamma - \sum_{n=1}^\infty
+\frac{1}{nn!}(- w/2)^n,
+\end{equation} 
+where 
+\begin{equation}
+\gamma = \int_o^1 \frac{1 - e^{-\alpha}}{\alpha} d\alpha
+- \int_1^\infty \frac{e^{-\alpha}}{\alpha} d\alpha = 0.5772157\ldots .
+\end{equation}
+This constant appears frequently in the mathematical 
+literature\citep{WhittakerMascheroni} and is variously known as the Euler constant or as the Euler-Mascheroni
+ constant.\citep{MorseMascheroni} There are various equivalent mathematical representations for this constant, another  of which is  
+\begin{equation}
+\gamma = \lim_{N\to \infty} \left(1 + \frac{1}{2} + \frac{1}{3} + \cdots
++ \frac{!}{N} - \ln N\right).
+\end{equation}
+The equivalence of these two representations is demonstrated further below.  (In the development in his \emph{Theory of Sound}, Rayleigh does not derive Eq. (\ref{J1integral}), but refers the reader to a 1842 calculus text by 
+De Morgan,\citep{DeMorgan}  where the derivation depends on some previously derived properties of the gamma function and is considerably different than that given above.)  
+
+\medskip
+
+With the approximate expression developed above  for $J_1$, the leading terms for the expansion of the integral $I_2$ are identified as
+\begin{equation}
+I_2 \approx  - \ln(w/2) - \gamma + w +  
+(w/2)^2\left[\ln(w/2) + \gamma - 1\right] + \ldots .
+\end{equation}
+ 
+
+\medskip
+
+  
+\noindent
+{\bf\emph{Ordering system}}
+
+\medskip
+
+In the ordering of the terms for expressing the outer solution at low frequencies, the sequence in order of decreasing magnitude is:  (i) $\ln{w}$, (ii) constant terms, (iii) $w\ln w$, (iv) $w$, (v) $w^2\ln w$, and (vi) $w^2$.  This ordering is in accord with the limit
+\begin{equation}
+\lim_{w \to 0}\left\{ w \ln w \right\}= 0.
+ \end{equation}
+ The proof, with $w < 1$, follows from
+ \begin{equation}
+2 w \left| 
+\ln w^{1/2}\right| = 2w\int_{w^{1/2}}^1 \frac{1}{\eta} d\eta <\left( 2w\right)\left(\frac{1}{w^{1/2}}\right)\left( 1 - w^{1/2}\right),
+\end{equation}
+where the expression on the right is seen to go to zero as $w\to 0$. (This proof is suggested by a  somewhat more general, and more complicated, proof in Courant's\citep{Courantmorecomplicated} \emph{Differential and Integral Calculus}.)
+
+\medskip
+
+  
+\noindent
+{\bf\emph{Matching of solutions}}
+
+\medskip
+
+With this ordering scheme, the preceding analysis allows one to write the inner expansion of the first approximation to the outer solution as
+\begin{equation} 
+\psi_{1,\mathrm{out}} = 2D\bigg\{ -\ln w + \left[\ln 2 -\gamma +i\frac{\pi}{2}\right]   + \frac{1}{4} w^2 \ln w  
+\nonumber
+\end{equation}
+\begin{equation}
+\qquad \qquad \qquad  +\left[-\frac{1}{4}\ln 2 -\frac{1}{4} 
++\frac{\gamma}{4}-i \frac{\pi}{4} \right]w^2 + \ldots\bigg\}.
+\end{equation}
+
+\medskip
+
+When one seeks to match this expansion with that of Eq. (\ref{outer_of_inner}), one discovers that they do not match.  Possibly if higher order terms were to be included, a better match would result.  Nevertheless, the first two terms of both expansions can be matched, with appropriate identifications of the constants $A$ and $D$, and such a matching is sufficient in the limit of sufficiently low frequencies.  The overall matching equation to this order is
+\begin{equation}
+\psi_{1, \mathrm{in}}[\mbox{two terms}] = \psi_{1, \mathrm{out}}[\mbox{two terms}],
+\end{equation}
+or 
+\begin{equation}
+ A - \frac{2}{\pi} \ln\epsilon  + \frac{2}{\pi} \ln w = -2D \ln w +2D \left[\ln 2 -\gamma +i\frac{\pi}{2}\right] .
+ \end{equation}
+ Equating the coefficient of $\ln w$ yields
+ \begin{equation}
+ D = - \frac{1}{\pi},
+ \end{equation}
+ and subsequent equating of the constant terms on the left and the right yields
+ \begin{equation}
+ A = \frac{2}{\pi}\left[ \ln \epsilon - \ln 2 + \gamma\right] - i.
+ \end{equation}
+ 
+\medskip
+
+  
+\noindent
+{\bf\emph{Summary of inner and outer solutions}}
+
+\medskip 
+ In terms of natural variables, one consequently has the first approximation to the inner solution given by
+ \begin{equation} \label{innerrigidbafflecase}
+ \psi_{1, \mathrm{in}} = \frac{2}{\pi}\left[\ln(k_\mathrm{ac}r/2)+\gamma\right] - i + \frac{2}{\pi}\sum_{n=1}^\infty
+\frac{1}{n[(2n)^2 -1]} (a/r)^{2n} \cos2 n \theta,
+ \end{equation}
+ and the corresponding solution for the outer solution is
+ \begin{equation} \label{outerrigidbafflecase}
+ \psi_{1,\mathrm{out}} = - \frac{1}{\pi}\int_{-\infty}^{\infty} \frac{1}{R}e^{ik_\mathrm{ac} R } dz_o = - i H_o^{(1)}(k_\mathrm{ac}r).
+ \end{equation}
+ 
+ 
+ 
+
+\section{OUTER SOLUTION, GENERAL CASE}
+
+\medskip
+
+  
+\noindent
+{\bf\emph{Hypothesized form of outer solution}}
+
+\medskip
+For the general case when the boundary condition at the surface involves a finite spring constant, a first approximation to the outer solution is not easily guessed.   To account for the presence of the compliant boundary, one seeks to represent the solution as 
+\begin{equation} \label{water_wave_outer1}
+\psi_{1,\mathrm{out}} = D_G\left\{H_o^{(1)}(k_\mathrm{ac} r_1)
+- H_o^{(1)}(k_\mathrm{ac} r_2 ) + U(x, y)\right\}.
+ \end{equation}
+ Here $D_G$ is a constant and  not necessarily the same as the $D$ that appeared in the outer solution for the rigid-baffle limit, and $U(x,t)$ is a function that remains to be determined.  The symbolism of the Hankel function is used explicitly here in the interests of brevity and also to take advantage of the above discussion of the rigid-baffle limit, where the Hankel function emerged in a natural manner.  The two distances that appear here are 
+ \begin{equation}
+ r_1 = [x^2 + (y-y_o)^2]^{1/2}, \qquad r_2 = [x^2 + (y+y_o)^2]^{1/2},
+ \end{equation}
+ and can be considered as distances from hypothetical line sources (Fig. 9) that are on the $y$-axis at $y_o$ and $-y_o$, respectively.  The first source is in the medium, the other is an ``image'' source above the interface.  Eventually, the limit as $y_o\to 0$ is taken, but the discussion here proceeds as if this quantity is small but nonzero.    A principal reason for including these two Hankel functions is so that the  quantity $U(x,t)$ can be perceived as originating from the interface. [The technique used here is suggested by a comparable treatment by Horace Lamb\citep{LambTremors} for the case of an elastic half-space.]
+ 
+\medskip
+
+  
+\noindent
+{\bf\emph{Partial differential equation for the Hankel function}}
+
+\medskip
+ 
+ Because the point-source solution in spherical coordinates satisfies the inhomogeneous Helmholtz equation,\citep{MorseGreenFunction}
+ \begin{equation} 
+\left( \nabla^2  + k_\mathrm{ac}^2\right) \left(\frac{1}{R}e^{i k_\mathrm{ac} R}\right) = - 4 \pi \delta(x)\delta(y-y_o) \delta (z-z_o),
+\end{equation}
+where
+\begin{equation}
+R = \left[ x^2 + (y-y_o)^2 + (z-z_o)^2\right]^{1/2},
+\end{equation}
+one concludes from Eq. (\ref{Hankel_function}) that
+\begin{equation} \label{inhomogeneous}
+\left(\frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial x^2}
++ k_\mathrm{ac}^2 \right)
+H_o^{(1)}(k_\mathrm{ac} r_1) = 4i \delta(x) \delta(y-y_o).
+\end{equation}
+The quantities such as $\delta(x)$ that appear on the right sides of the above equations are delta-functions (sometimes called Dirac delta functions), which can be formally regarded as the limit 
+\begin{equation}
+\delta(x) = \lim_{\epsilon \to 0}\delta_\epsilon (x);  \qquad  \delta_\epsilon (x)= \frac{1}{ (\surd\pi) \epsilon} e^{- x^2\epsilon^2}
+\end{equation}
+The area under the spiked function  $\delta_\epsilon(x) $ is unity, and the width $\epsilon$ of the spike goes to zero as  $\epsilon \to 0$, while the peak value goes to infinity.
+
+ 
+\medskip
+
+  
+\noindent
+{\bf\emph{Hankel function expressed as a Fourier integral}}
+
+\medskip
+The above depiction of the Hankel function as the solution for waves generated by a line source allows a convenient representation as a Fourier integral.
+\begin{equation}
+H_o^{(1)}(k_\mathrm{ac} r_1) = \lim_{\epsilon\to 0}\left\{\int_{-\infty}^\infty G(K, y-y_o) e^{iK x} e^{- \epsilon K^2} dK\right\}.
+\end{equation}
+
+
+\begin{theorem}
+In the solution as a Fourier integral  of partial differential equations with delta functions on the right side, insert a Gaussian-type convergence factor in the integrand, with the understanding that you will eventually take the limit.
+\end{theorem}
+
+The reason for the insertion of the convergence factor is that the delta function is such that, for any well-behaved function\citep{Lighthill} $F(w)$, one has
+\begin{equation}
+F(x_o) = \lim_{\epsilon \to 0}\int_{-\infty}^\infty F(x) \delta_{\epsilon}(x - x_o) dx,
+\end{equation}
+where
+\begin{equation}
+\delta_{\epsilon}(x) = \frac{1}{2\pi}   \left\{\int_{-\infty}^\infty   e^{iK x} e^{- \epsilon K^2} dK\right\},
+\end{equation}
+Thus one concludes that the delta function is adequately represented by $\delta_{\epsilon}$ for sufficiently small $\epsilon$.
+
+\medskip
+
+With the above representation for the Fourier transforms of the the two sides of the inhomogeneous partial differential equation, Eq. (\ref{inhomogeneous}), one concludes  that the integrand factor $G$ must satisfy the inhomogeneous ordinary differential equation
+\begin{equation} \label{ordinary}
+\frac{d^2 G}{dy^2} + \chi^2 G = \frac{2i}{\pi}\delta(y-y_o),
+\end{equation}
+where 
+\begin{equation} \label{squarechi}
+\chi^2 = \tilde k_\mathrm{ac}^2 - K^2.
+\end{equation}
+Here, with some anticipation that it will be useful in circumventing mathematical difficulties, the artificial damping introduced into the linearized Euler equation has been included, so that $k_\mathrm{ac}^2$ is replaced by $\tilde k_\mathrm{ac}^2$.
+
+\medskip
+
+  
+\noindent
+{\bf\emph{Causality requirements on the integrand factor}}
+
+\medskip
+
+
+To solve the above inhomogeneous differential equation subject to some appropriate causality conditions, it is sufficient to require: (i) that in the limit of large real positive $K$ the function $G$ should asymptotically go to zero as $|y-y_o| \to \infty$ and (ii)  that $G$ should be an analytic function of $K$ all along the real axis.    The second condition requires that one consider the artificial damping factor $\nu_\mathrm{art}$ as being nonzero and positive.  The solution to the differential equation can be tentatively written
+\begin{equation}
+G(K, y-y_o) = \frac{1}{\pi \chi} e^{i\chi |y-y_o|},
+\end{equation}
+with a suitable definition of the function $\chi$ in terms of the quantity $K$. Note that the proffered $G$ is continuous at $y=y_o$ and that its derivative is discontinuous at $y_o$, so that
+\begin{equation} 
+\lim_{\epsilon \to 0}\left\{\left(\frac{dG}{dy}\right)_{y= y_o+\epsilon} - \left(\frac{dG}{dy}\right)_{y= y_o- \epsilon} \right\} = \frac{2i}{\pi}.
+\end{equation}
+The latter is consistent with the discontinuity required by the delta function on the right side of Eq. (\ref{ordinary}).
+
+\medskip
+
+  
+\noindent
+{\bf\emph{Definition of functions in the complex plane}}
+
+\medskip
+
+\begin{theorem}
+Whenever you introduce a function of a complex variable in the solution of a problem, make sure that it is unambiguously defined at all points in the complex plane.
+\end{theorem}
+
+For the case at hand, the quantity in need of definition is $\chi$. Its square is given by Eq. (\ref{squarechi}), but there are two possible square roots.  The first requirement stated above requires that 
+\begin{equation}
+\chi = i \left(K^2 - \frac{\omega(\omega + i\nu_\mathrm{art})}{c^2}\right)^{1/2} \qquad 
+\mbox{for $K> \omega/c$},
+\end{equation}
+where the phase of the radical is understood to approach $0$ at large positive $K$.  Near $K = \omega/c$, this approximates to
+\begin{equation}
+\chi \approx i\left(\frac{2\omega}{c}\right)^{1/2} \left[ \left(K - \frac{\omega}{c} \right) -
+ i\frac{\nu_\mathrm{art}}{2c}\right]^{1/2},
+\end{equation}
+and the quantity in brackets is seen to have a phase that goes from $0$ to $-\pi/2$ as K goes from a large positive value to $\omega/c$, and to have a phase between $-\pi/2$ and $-\pi$  for $K$ slightly less than $\omega/c$.  Consequently, one can conclude that 
+\begin{equation}
+0  < \mathrm{Ph}\{ \chi \} < \frac{\pi}{2} \qquad \mbox{for $0 < K <\infty$}.
+ \end{equation}
+ In the limit $\nu_\mathrm{art} \to 0$, the phase along the real axis is
+ \begin{equation}
+  \mathrm{Ph}\{ \chi \} =  0 \quad \mbox{for $0 < K <\omega/c$},\qquad \qquad
+\mathrm{Ph}\{ \chi \} =  \pi/2 \quad \mbox{for $ \omega/c < K < \infty$}  .
+\end{equation}
+For negative values of $K$, a similar analysis results in the deduction
+\begin{equation}
+  \mathrm{Ph}\{ \chi \} =  0 \quad \mbox{for $-\omega/c < K <0$},\qquad
+\mathrm{Ph}\{ \chi \} =  \pi/2 \quad \mbox{for $ -\infty < K < -\omega/c$}  .
+\end{equation}
+
+\medskip
+\noindent
+{\bf\emph{Introduction of branch cuts}}
+
+\medskip
+
+\begin{theorem}
+To help insure that all functions of a complex variable are uniquely defined in the complex plane, introduce branch cuts as needed.
+\end{theorem}
+
+ To extend the definition of $\chi$ to values off the real axis, and to also insure that it is uniquely defined at every point in the complex plane, one needs to place branch-cuts.\citep{branch}${}^,$\citep{Deavenport}${}^,$\citep{Bucker} There are branch-points at those values of $K$ where $\chi = 0 $, so that 
+ \begin{equation}
+ K_{{}_{BP}} = \pm\frac{\omega}{c} \left( 1 +\frac{i\nu_\mathrm{art}}{\omega}\right)^{1/2}.
+ \end{equation}
+ One branch-point is slightly above the real axis at $\omega/c$ and the other is slightly below the real axis at $-\omega/c$.  Because $\chi$ must be analytic along the real axis for nonzero $\nu_\mathrm{art}$, the branch-cuts must not cross the real axis, and an appropriate selection is as shown in Fig. 10, where the one on the left goes vertically downwards and the one on the right goes vertically upwards.
+ 
+ 
+ At this point, one may safely take the limits as $\nu_\mathrm{art} \to 0$ and as $\epsilon  \to 0$, so that the contour integral expression for the Hankel function becomes
+ \begin{equation} \label{contourHankel}
+ H_o^{(1)}(k_\mathrm{ac} r_1) = \frac{1}{\pi}\int_C \frac{1}{\chi}\,\,
+ e^{i\chi|y-y_o|} e^{iKx} \, dK,
+ \end{equation}
+ where the contour of integration is as shown in Fig. 11. On the real $K$-axis, the function $\chi$ is defined as described above, and it is required to be analytic everywhere in the complex plane, except at the branch-cuts, across which it has a change in phase of $\pi$.  While this integral is not an explicit function  of $r_1$, the method of derivation requires that such be  so.  (It is a relatively simple matter to start from the above expression, make a change of integration variable, do an appropriate contour deformation, and prove that this is indeed the case.)
+ 
+ \medskip 
+ 
+ 
+  
+\noindent
+{\bf\emph{Satisfying the compliant-surface boundary condition}}
+
+\medskip
+
+
+The evaluation of the first approximation, $\psi_{1,\mathrm{out}}$, as given by Eq. (\ref{water_wave_outer1}), requires that one identify the function $U(x,y)$.  Since this corresponds to a wave that originates at the   interface, one can take it as
+\begin{equation}
+U(x,y) = \frac{1}{\pi}\int_C \mathscr{A}
+ e^{i\chi y} e^{iKx} \, dK,
+ \end{equation}
+ where the function $\mathscr{A}$ is to be determined.   The integration contour  is the same as previously derived for the Hankel function.  
+ 
+ \medskip 
+ 
+ With this assumed form for $U(x,y)$, the first approximation for the outer solution, including the two Hankel functions, can be written
+ \begin{equation}
+ \psi_{1, \mathrm{out}} = \frac{D_G}{\pi} \int_C \left\{ \frac{e^{i\chi |y-y_o|}}{\chi} - \frac{e^{i\chi |y+y_o|}}{\chi} + \mathscr{A} e^{i\chi y}\right\}
+ e^{iKx} dK.
+\end{equation}
+The boundary condition of Eq. (\ref{surfacewaveboundarycondition}) is consequently satisfied if
+ \begin{equation}
+ - 2i e^{i\chi y_o} + i \chi \mathscr{A} + \tilde k_ \mathrm{surf} \mathscr{A} = 0,
+ \end{equation}
+ and this leads to
+ \begin{equation}
+ \mathscr{A} = \frac{2i e^{i\chi y_o} }{i \chi + \tilde k_\mathrm{surf}}.
+ \end{equation}
+ 
+ \medskip
+ 
+ At this point, it is   safe to assume that an acceptable expression for the first approximation to the outer solution can be obtained if one takes the limit as $y_o \to 0$, so that 
+ \begin{equation} \label{psi1out_contour}
+  \psi_{1, \mathrm{out}} = \frac{2iD_G}{\pi} \int_C \left( \frac{1}{i\chi + \tilde k_\mathrm{surf}}\right)e^{i\chi y} e^{iKx} dK.
+\end{equation}
+Note, however, that the artifice of using a nonzero positive $y_o$ was essential for  the derivation of this expression.   The assertion that this expression is adequate is confirmed further below  by the success that  one has of matching it to the inner solution. 
+
+ \medskip
+ 
+ Before proceeding further with the general case, it is appropriate to verify that this outer solution is the same as that for the special case of the rigid-baffle case in the limit of $k_\mathrm{surf} \to 0$.  Taking this limit in the above expression and using the previously derived contour integral expression for the Hankel function, Eq. (\ref{contourHankel}), yields
+ \begin{equation} \label{outerwithHankel}
+ \psi_{1,\mathrm{out}}  = 2D_G H_o^{(1)}(k_\mathrm{ac} r) \qquad \mathrm{if} \quad k_\mathrm{surf} = 0.
+ \end{equation}
+ This is the same as that of Eq. (\ref{rigidbaffleouter}) with the identification $2 D_G = i \pi D$.
+ 
+\medskip
+
+Returning to the general case, consideration is given to the following dictum:
+ 
+ \begin{theorem}
+ 
+ Once you have derived a formal expression as a definite integral for a desired quantity, manipulate the integrand and the integration contour so as to obtain an expression more readily amenable to numerical computation and/or analytical approximation.
+ 
+ \end{theorem}
+ 
+ Just how one does the appropriate manipulations may not be obvious at the outset, but one should think of various possibilities and try them.
+ 
+ \medskip
+ 
+	  Examination of the integrand in Eq. (\ref{psi1out_contour}) in the limit of small positive $\nu_\mathrm{art}$ shows that it has poles that are at
+ \begin{equation} 
+ K = k_p + i0^+; \qquad K = -k_p -i0^+,
+ \end{equation}
+ where
+ \begin{equation} \label{kpdefinition}
+ k_p = \left( k_\mathrm{ac}^2 + k_\mathrm{surf}^2\right)^{1/2}.
+ \end{equation}  
+ Here the symbol $0^+$ denotes a small positive quantity.   One pole is close to the positive real axis, but is slightly above the real axis.   The other is close to the negative real axis, but is slightly below the real axis. Since the integration contour $C$ proceeds along the real axis, it must go above the pole on the negative real axis, and below the pole on the positive real axis.    If the artificial damping parameter is allowed to go to zero, the contour  must be understood to take a upward detour around the pole on the negative real axis and a downward detour around the pole on the positive real axis, both poles now lying on  the real axis.   
+ 
+\medskip
+\noindent
+{\bf\emph{Residue theorem and branch-line integrals}}
+
+\medskip
+
+In considering possible contour deformations, one must make a choice as to whether $x$ is positive or negative. The result is expected to be even in $x$, but the mathematical steps that are described here require a definite choice, which is taken as $x>0$.  
+A surface wave emerges (as a contribution from the residue at a pole)    if $x$ is assumed nonzero and positive and if the contour is deformed (Fig. 12) to contour $C^{\prime\prime}$, which has three principal parts:
+(i)  a line integral down the left side of the branch-cut in the upper half plane, from $k_\mathrm{ac} + i\infty$ down to $k_\mathrm{ac}  $, (ii) a line integral that goes up the right side of the same 
+branch-cut, from $k_\mathrm{ac} $ up to $k_\mathrm{ac} + i\infty$, and (iii) a counterclockwise contour around the pole at $K=k_P$.  On the left side of the branch-cut, $\chi \to s$ in the limit as $s \to \infty$, where $s$ is distance upwards from the origin, while on the right side, $\chi \to -s$ in the limit as $s \to 0$.  Thus,  for the contour just described, and with the application of the residue theorem, Eq. (\ref{psi1out_contour}) becomes
+\begin{equation}  \label{SWandBLI}
+ \psi_{1, \mathrm{out}} =  
+ D_G[\mathrm{SW}] + D_G[\mathrm{BLI}],
+  \end{equation}
+where [SW] (for  surface wave) results from the pole contribution and [BLI] results from the branch-line integrals.
+
+\medskip
+
+The application of Cauchy's theorem yields
+\begin{equation}
+[\mathrm{SW}] = (2\pi i) \left(\frac{2i}{\pi}\right) \frac{1}{i (d\chi/dK)_P}
+\,\, e^{i\chi_P y} e^{iK_P \left|x\right|},
+\end{equation}
+where the subscript ``P''  denotes values at the pole.  One notes from Eq. (\ref{squarechi}) that 
+\begin{equation}
+\frac{d\chi}{dK} = - \frac{K}{\chi}.
+\end{equation}
+Also, one notes that  $\chi_P = i k_\mathrm{surf}$, so the above  reduces to
+ \begin{equation} \label{surfacewave}
+  [\mathrm{SW}] =4 \frac{k_\mathrm{surf}}{k_p} \, e^{-k_\mathrm{surf}  y} e^{i k_p \left|x\right|}.
+  \end{equation}
+  
+  \medskip 
+  
+  For the branch-line integral term, one notes that $dK \to
+  -i\,ds$ for the downward portion of the path, and $dK \to i\,ds$ for the upward portion  of the path.  For the two portions, $s$ ranges from $\infty$ to $0$ and from $0$ to $\infty$.  The quantity $\chi$ undergoes a phase change of $\pi$ across the branch-line.  
+Thus one has  
+\begin{equation} \label{branchlineintegralterm}
+[\mathrm{BLI}] =  \frac{2i}{\pi}\int_o^\infty \left\{ \left(\frac{ e^{-s|x|} e^{i \chi^+ y}}{ i \chi^+ + k_\mathrm{surf}}\right) -\left( \frac{ e^{-s|x|} e^{-i \chi^+ y}}{- i \chi^+ + k_\mathrm{surf}}\right)\right\} i \, ds.
+\end{equation}
+Here 
+   \begin{equation}
+  \chi^+ = - \left(s^2 - 2is  k_\mathrm{ac}\right)^{1/2}
+  \end{equation}
+  represents the value of $\chi$ on the right (positive) side of the branch-cut.  The phase of tne radical is defined so that it approaches  $s$ in the limit of large positive  $s$.
+  
+  
+  \medskip
+\noindent
+{\bf\emph{Inner expansion of outer solution}}
+\medskip
+
+To accomplish a suitable matching, one needs an appropriate approximation to the outer solution for the case when both $x$ and $y$ are small.  (The requirement is actually that the product of either of these coordinates with either $k_\mathrm{ac}$ or  $k_\mathrm{surf}$ should be substantially less than unity.) The principal analytic challenge for the determination of such an approximation is with the quantity [BLI], so it is discussed first here. The principal trick that is used is to divide the range of integration over the variable $s$ into two.
+
+\medskip
+
+
+To this purpose, one writes
+\begin{equation}
+[\mathrm{BLI}]  = I_1 + I_2 + I_3 + I_4,
+\end{equation}
+where 
+\begin{equation}
+I_1 = \frac{2i}{\pi}  \int_o^{\phi }  \left(\frac{ e^{-s|x|} e^{i \chi^+ y}}{ i \chi^+ + k_\mathrm{surf}}\right)i\, ds,
+\end{equation}
+\begin{equation}
+I_2 = \frac{2i}{\pi}  \int_{\phi }^\infty  \left(\frac{ e^{-s|x|} e^{i \chi^+ y}}{ i \chi^+ + k_\mathrm{surf}}\right)i\, ds,
+\end{equation}
+\begin{equation}
+I_3= \frac{2i}{\pi}  \int_0^{\phi }  \left(\frac{ e^{-s|x|} e^{-i \chi^+ y}}{ i \chi^+ - k_\mathrm{surf}}\right)i\, ds,
+\end{equation}
+\begin{equation}
+I_4= \frac{2i}{\pi}  \int_{\phi }^\infty  \left(\frac{ e^{-s|x|} e^{-i \chi^+ y}}{ i \chi^+ - k_\mathrm{surf}}\right)i\, ds.
+\end{equation}
+The parameter $\phi$,  which splits the integration ranges, is initially arbitrary, but a judicious choice is so that
+\begin{equation} 
+\left| \phi  x\right| \ll 1; \qquad \left| \phi  y \right| \ll1,
+\end{equation}
+\begin{equation} 
+\left| \phi  \right| \gg k_\mathrm{ac}; \qquad \left| \phi   \right| \gg k_\mathrm{surf}.
+\end{equation}
+Providing that the coordinates $|x|$ and $y$ are sufficiently small, one expects   a parameter meeting these requirements to exist.
+
+\medskip
+
+Given that one is interested only in the limit of small $|x|$ and $y$, one can approximate the various integrals as follows:
+\begin{equation}
+I_1 \to  \frac{2i}{\pi}  \int_0^\phi  \left(\frac{1}{i \chi^+ + k_\mathrm{surf}}\right)i\, ds,
+\end{equation}
+\begin{equation}
+I_2 \to  \frac{2i}{\pi}  \int_ \phi^\infty  \left(\frac{ e^{-s|x|} e^{-is y}}{- i s }\right)i\, ds,
+\end{equation}
+\begin{equation}
+I_3 \to  \frac{2i}{\pi}  \int_0^\phi  \left(\frac{1}{i \chi^+ - k_\mathrm{surf}}\right)i\, ds,
+\end{equation}
+\begin{equation}
+I_4 \to  \frac{2i}{\pi}  \int_ \phi^\infty  \left(\frac{ e^{-sx} e^{+is y}}{ -i s }\right)i\, ds.
+\end{equation}
+
+\medskip 
+
+For the evaluation of the approximate form of $I_2$, one changes the variable of integration to $p = (x+iy) s$, so that
+\begin{equation} 
+I_2 \to - \frac{2i}{\pi}  \int_{(|x|+i y) \phi}^\infty  \left(\frac{ e^{-p}}{p }\right)dp.
+\end{equation}
+The integral that appears here is an integral already encountered in the course of the analytical development within the  present paper [see  Eq. (\ref{J1integral})], so one has, to leading order in $|x|$ and $y$, 
+\begin{equation}
+I_2 \to  - \frac{2i}{\pi}\left\{ - \ln[(|x|+iy) \phi ]  - \gamma\right\},
+ \end{equation}
+where $\gamma$ is the Euler-Mascheroni constant.  Then, because $|x|+iy = r e^{i\theta}$, this can  be rewritten
+\begin{equation}
+I_2 \to - \frac{2i}{\pi}\left[- \ln r - i \theta -\ln \phi - \gamma\right]. 
+\end{equation}
+Similarly, one finds
+\begin{equation}
+I_4 \to - \frac{2i}{\pi}\left[- \ln r + i \theta -\ln \phi - \gamma\right],
+\end{equation}
+so that 
+\begin{equation}
+I_2+I_4 \to - \frac{2i}{\pi}\left[-2 \ln r  -2 \ln\phi - 2\gamma\right]. 
+\end{equation}
+
+\medskip
+
+For the remaining two integrals, one has
+\begin{equation}
+I_1 + I_3 \to\frac{2i}{\pi} \int_o^\phi \left(\frac{2 i \chi^+}{(i\chi^+)^2 - k_\mathrm{surf}^2}\right) i\, ds,
+\end{equation}
+where one notes that
+\begin{equation}
+ (i\chi^+)^2 - k_\mathrm{surf}^2  = - (s-ik_\mathrm{ac})^2 - k_p^2.
+ \end{equation}
+ 
+ \medskip
+ 
+ To render this into a suitable form, a sequence of changes of integration variable is appropriate.  First, one lets $u = s - i k_\mathrm{ac}$, so that
+ \begin{equation}
+I_1 + I_3 \to\frac{2i}{\pi} \int_{-ik_\mathrm{ac}}^{\phi-ik_\mathrm{ac}} \left(\frac{-2 i (u^2 + k_\mathrm{ac}^2)^{1/2}}{-u^2 -k_p^2}\right) i\, du.
+\end{equation}
+ The integration range is next broken up into one from $-i k_\mathrm{ac}$ to $0$ and one from $0$ to $\phi - ik_\mathrm{ac}$.   In the first integral, one changes the integration variable to $\alpha$, where $u =- i k_p \sin \alpha$.  In the second integral, one changes the integration variable to $\beta$, where $u = k_p\tan \beta$.  With these changes one has
+ \begin{equation}
+ I_1+I_3 \to -\frac{4i}{\pi} \left[i J_{1,G} + J_2\right],
+ \end{equation}
+ where 
+ \begin{equation}
+ J_{1,G}  = \int_o^{\sin^{-1}(k_\mathrm{ac}/k_p)} \frac{\left([k_\mathrm{ac}/
+  k_p]^2- \sin^2 \alpha\right)^{1/2}}{  \cos\alpha} d\alpha,
+ \end{equation}
+\begin{equation}
+ J_2 = \int_o^{\tan^{-1}([\phi - ik_\mathrm{ac}]/k_p)}  \left(  \tan^2\beta + 
+ [k_\mathrm{ac}/k_p]^2\right)^{1/2} d\beta.
+ \end{equation}
+ (The integral $J_{1,G}$ is here flagged as being an integral that   enters explicitly into the final result that eventually emerges.  The subscript ``G'' is added to imply that it is appropriate for the general case.)
+ The upper limit on  the latter integral is close to $\pi/2$ and one notes that the integrand  becomes infinite as $\beta\to \pi/2$.  To take this into account and to isolate the dependence on the parameter $\phi$, one rewrites this integral as
+ \begin{equation} \label{J2limit}
+ J_2 \to \int_o^{\tan^{-1}([\phi - ik_\mathrm{ac}]/k_p)} \tan \beta\, d\beta
+ + \int_o^{\tan^{-1}([\phi - ik_\mathrm{ac}]/k_p)}F(\beta, k_\mathrm{ac}/k_p)
+ d\beta,
+ \end{equation}
+ with the abbreviation
+ \begin{equation}
+ F(\beta, k_\mathrm{ac}/k_p) =  \left(  \tan^2\beta + 
+ [k_\mathrm{ac}/k_p]^2\right)^{1/2} - \tan\beta.
+ \end{equation}
+ Note that the latter quantity goes to $0$ as $\beta\to \pi/2$, the asymptotic behavior being
+ \begin{equation}
+ F(\beta, k_\mathrm{ac}/k_p) \to \frac{1}{2} 
+ \frac{(k_\mathrm{ac}^2/k_p^2)}{\tan \beta} \qquad \mathrm{as} \quad \beta \to \pi/2.
+  \end{equation}
+ 
+ \medskip
+ 
+ The first integral in the above-stated  decomposition is readily integrated since
+\begin{equation}
+\tan \beta \, d \beta =- d\,\ln (\cos \beta).
+\end{equation}
+One notes also that 
+\begin{equation}
+\cos\left[\tan^{-1} ([\phi - ik_\mathrm{ac}]/k_p)\right] = \left[ 1 + \left(\frac{\phi - i k_\mathrm{ac}}{k_p}\right)^2 \right]^{-1/2} \approx \frac{k_p}{\phi},
+\end{equation}
+where the latter approximation is consistent with the restrictions placed on the parameter $\phi$.
+Thus one has 
+\begin{equation}
+\int_o^{\tan^{-1}([\phi - ik_\mathrm{ac}]/k_p)} \tan \beta\, d\beta \to \ln \phi - \ln k_p.
+\end{equation}
+
+ 
+ In the same spirit of approximation, it is consistent to set the upper limit on the integral in the second term of Eq. (\ref{J2limit}) to $\pi/2$, so that it becomes
+\begin{equation}
+K_{2,G} =   \int_o^{\pi/2} F(\beta, k_\mathrm{ac}/k_p)
+ d\beta.
+ \end{equation}
+ (This integral is also flagged with the subscript ``G'' to imply that it enters into the final result for the general case.)
+ 
+ \medskip
+ 
+ 
+Thus, one arrives at the approximate result
+\begin{equation}
+I_1 + I_3 \to \frac{4}{\pi}J_{1,G} - \frac{4i}{\pi}\left[ K_{2,G} +\ln\phi - \ln k_p\right],
+\end{equation}
+where the quantities $J_{1,G}$  and $K_{2,G} $ are functions of the ratio
+$k_\mathrm{ac}/k_p$.  Then, since 
+\begin{equation}
+I_2 + I_4 \to \frac{4i}{\pi}[\ln r + \ln\phi + \gamma],
+\end{equation}
+the branch-line integral approximates to 
+\begin{equation}
+[\mathrm{BLI}] = \frac{4}{\pi}J_{1,G}+ \frac{4i}{\pi}\left[\ln(k_p r) -K_{2,G} + \gamma\right]
+\end{equation}
+As  anticipated, the terms involving the parameter $\phi$  cancel.  Also, the logarithm terms combine to result in a logarithm of a dimensionless quantity.
+
+
+\medskip
+
+The surface wave factor $[\mathrm{SW}]$ that appears in Eq. (\ref{surfacewave}) to the same order of approximation is
+\begin{equation}
+[\mathrm{SW}] \to 4 \frac{k_\mathrm{surf}}{k_p}
+\end{equation}
+Consequently, the leading terms in the inner expansion of the outer expansion are
+\begin{equation}
+\psi_{1,\mathrm{out}} \approx D_G\left\{  4 \frac{k_\mathrm{surf}}{k_p}
++\frac{4}{\pi} J_{1,G} + \frac{4i}{\pi}\left[\ln(k_p r) -K_{2,G} + \gamma\right]
+\right\}
+\end{equation}
+
+\medskip
+
+The two functions, $J_{1,G}(k_\mathrm{ac}/k_p)$ and 
+$K_{2,G}(k_\mathrm{ac}/k_p)$, are monotonically increasing functions of  $k_\mathrm{ac}/k_p$.  (Plots of these are easy to generate  with standard software, but because they would add little to the pedagogical purposes of the present paper, they are not included with this paper.) Because of the definition of $k_p$ in Eq. (\ref{kpdefinition}) the parameter $k_\mathrm{ac}/k_p$ ranges from $0$ to $1$.  The integral definitions of these two functions are such that 
+\begin{equation}
+J_{1,G}(0) = 0; \qquad J_{1,G}(1)  =  \frac{\pi}{2},
+\end{equation}
+\begin{equation}
+K_{2,G}(0) = 0;  \qquad K_{2,G}(1) =  \int_o^{\pi/2}\left( \frac{1 - \sin \beta}{\cos \beta}\right) d\beta = \int_o^{\pi/2}\left( \frac{\cos\beta}{1 + \sin \beta} \right) d\beta =\ln 2.
+\end{equation}
+
+\medskip
+\noindent
+{\bf\emph{Matching of inner and outer solutions}}
+\medskip
+
+
+The matching of the two two solutions proceeds in the same manner as was done for the limiting case when the baffle is rigid:
+\begin{equation}
+\psi_{1, \mathrm{in}}[\mbox{two terms}] = \psi_{1, \mathrm{out}}[\mbox{two terms}],
+\end{equation}
+and, for the present general case, this yields
+\begin{equation}
+ A - \frac{2}{\pi} \ln (k  a)  + \frac{2}{\pi} \ln (k  r )=
+ D_G\left\{ 4 \frac{k_\mathrm{surf}}{k_p}
++\frac{4}{\pi} J_{1,G} + \frac{4i}{\pi}\left[\ln(k_p r) -K_{2,G} + \gamma\right]
+\right\}
+\end{equation} 
+ The two expressions are the same,  providing $k=k_p$,  and  
+ providing
+ \begin{equation}
+  \frac{2}{\pi} = \frac{4iD_G}{\pi}, \qquad  A = \frac{2}{\pi}\left[\ln (k_p  a)  + \gamma  - K_{2,G} - i\left(J_{1,G} +\pi 
+  \frac{k_\mathrm{surf}}{k_p} \right)\right] .
+  \end{equation}
+  
+  \medskip
+  
+  Consequently, the inner solution, to a first approximation, is
+  \begin{equation}  \label{innergeneralcase}
+  \psi_{1,\mathrm{in}} = \frac{2}{\pi} \left\{ \ln (k_p r) + \gamma - K_{2,G} -i \left( J_{1,G} + \pi \frac{k_\mathrm{surf}}{k_p}\right)
++  \sum_{n=1}^\infty \frac{(a/r)^{2n}}{n[(2n)^2 -1]}  \cos2 n \theta\right\},
+  \end{equation}
+  and the corresponding outer solution is
+  \begin{equation}  \label{outergeneralcase}
+   \psi_{1,\mathrm{out}} = - \frac{i}{2} [ \mathrm{BLI}]  - 2i
+  \frac{k_\mathrm{surf}}{k_p} e^{-k_\mathrm{surf} y} e^{i k_p |x|}
+  \end{equation}
+  
+  \medskip
+  
+  Both of these expressions are consistent with the  results derived previously, Eqs. (\ref{innerrigidbafflecase}) and (\ref{outerrigidbafflecase}), for the baffled wall case.  In this limit, one has $k_p = k_\mathrm{ac}$ and $k_\mathrm{surf} = 0$.  One has
+  $K_{2,G} = \ln 2$ and $J_{1,G} = 1$ in this limit, so Eq. (\ref{innergeneralcase})
+  reduces to the result in Eq. (\ref{innerrigidbafflecase}).  Also, in this limit, Eqs. (\ref{outerwithHankel}) and (\ref{SWandBLI}) require that 
+  \begin{equation}
+  [BLI] \to 2H_o^{(1)}(k_\mathrm{ac} r),
+  \end{equation}
+  so Eq. (\ref{outergeneralcase}) reduces to Eq. (\ref{outerrigidbafflecase}) in this limit.
+  
+     
+  \section{ENTRAINED MASS AND RADIATION RESISTANCE}
+  
+  
+  A potential application of results such as derived above is the derivation of the reactive force per unit length that the medium exerts on the oscillating cylinder.  Such would be important, for example, if one sought  to predict the dynamics of the cylinder when acted upon by an external force.  It would also be useful for the analysis of the scattering of external waves by the movable cylinder.  Let $Y_c(t)$ be the downward displacement, so that $V(t) = dY_c/dt$.  Also, let $m_c$ denote the actual mass of the cylinder per unit length. Consideration of a free-body diagram   of the oscillating cylinder and application of  Newton's second law (without regard to linearization) yields
+ \begin{equation} \label{NewtonsLaw}
+ m_c \frac{dV }{dt} = F_\mathrm{ext}    - F_\mathrm{reac}.
+ \end{equation}
+ Here $F_\mathrm{ext} $ is the external force per unit length in the positive-$y$ direction (downward),
+  and $F_\mathrm{reac} $ is the reactive force (caused by pressure fluctuations on the $+y$ side of the cylinder)  per unit length in the $-y$ or upward direction.  (For simplicity, the possibility that the ambient pressure varies with depth, due to gravity, is neglected here, so the buoyancy force does not appear.)  The reactive force is associated with the disturbance pressure.
+  
+  \medskip
+  
+     
+  
+    
+ The principal interest here is in the reaction force.  Given that the oscillations are of constant frequency, one writes the complex amplitude of this reaction force as
+ \begin{equation}
+\hat F_\mathrm{reac} = \hat F_R + i \hat F_I,
+\end{equation}
+so that it is divided into real and imaginary parts.   The subscript ``reac'' is omitted on these quantities, with the expectation that the omission will cause no confusion.  Both of these components depend on frequency.  A possibly useful way of re-expressing these is such that
+\begin{equation}
+\hat F_R + i \hat F_I = -\omega^2 m_\mathrm{ent} \hat Y_c    - i\omega R \hat Y_c = -\omega^2 m_\mathrm{ent} V_o/(-i\omega)      - i\omega R V_o/(-i\omega),
+\end{equation}
+and
+so that the equation of motion, when expressed for constant frequency oscillations, becomes
+\begin{equation} \label{transferfunctioninference}
+- \omega^2 (m_c + m_\mathrm{ent})\hat Y_c  - i\omega R \hat Y_c   
+= \hat F_\mathrm{ext}.
+\end{equation}
+ 
+
+\medskip
+
+In this form, the equation has the familiar form of a mass-dashpot-spring system excited by a constant-frequency external force.  The quantity $m_\mathrm{ent}$ is identified as being an apparent mass which is entrained\citep{JungerFeit} (hence the subscript ``ent'') within the fluid by the oscillating cylinder.  The quantity $R$ is   identified as an apparent (frequency-dependent) dash-pot constant per unit length (units of force per unit length divided by velocity).  This quantity is associated with the loss of energy from the vibrating cylinder per unit  length due to the radiation of waves (both surface waves and acoustic waves)  into the external medium, so it is here called the \emph{radiative resistance}.  (In typical modern books on mechanical vibrations, the dash-pot constant is represented by the letter $c$, but that symbol is reserved here for the sound speed.)  The time average loss of energy can be identified with the time averaged power output of the reaction of this force on the medium, so that
+\begin{equation}
+\mathscr{P} = \frac{1}{2} V_o^2 R.
+\end{equation}
+The factor of $1/2$ is because of the time averaging of the square of a sinusoidal function of time.  Note that the analogy with the lumped parameter model of the spring-dashpot-mass system is imperfect because  one expects both $m_\mathrm{ent}$ and $R$ to be frequency-dependent.  There is no reason at the outset for these to approach constants in the low-frequency limit.
+
+\medskip
+
+
+Because the reaction force  is caused by the disturbance pressure, one can write
+\begin{equation}
+\hat F\mathrm{reac} = \left( -\omega^2 m_\mathrm{ent} - i\omega R\right) \left( \frac{V_o}{-i\omega}\right) = \int_o^{\pi} (\sin \theta )(\hat p)_{r=a} a d\theta.
+\end{equation}
+In terms of the dimensionless quantity $\psi$ that is introduced in Eq. (\ref{introduction_of_psi}), this leads to 
+\begin{equation} \label{entrainedInnerIntegral}
+m_\mathrm{ent} =- \rho a^2 \int_o^\pi  \left(\psi_R \right)_{r=a}\sin\theta d\theta,
+\end{equation}
+\begin{equation} \label{RfromInnerSoln}
+R = -\omega  \rho a^2 \int_o^\pi  \left(\psi_I \right)_{r=a}\sin\theta d\theta,
+\end{equation}
+where $\psi_R$ and $\psi_I$ are the real and imaginary parts of $\psi$.
+
+\medskip
+
+Ordinarily, one would expect that, for low frequencies, it would be sufficient to use   the first approximation to the inner solution in the two expressions above.   However, if one desires a nonzero answer, even if a very small number, this will not be sufficient if the first approximation to the inner solution for $\psi$ has, say, an imaginary part of $\psi$ that is identically zero.   (This is not the case for the general example considered here.)  
+
+\medskip
+
+
+An alternate procedure (discussed further below) for determination of the radiation resistance is to seek a far-field approximation to the outer solution, and to then derive a first approximation to the total power radiated by waves to large distances.  The appropriate formula which results from the energy corollary  is
+\begin{equation}
+\frac{1}{2}V_o^2 R = \lim_{r\to \infty} \left\{ r  \int_o^\pi\frac{1}{2} \mathrm{Re} \left\{\hat p \hat v_r^*\right\} d\theta\right\}.
+\end{equation}
+Alternately, in terms of the outer solution, this yields
+\begin{equation} \label{RexpressedOuterSoln}
+R = -\omega \rho a^2 \lim_{r\to \infty} \left\{ r  \int_o^\pi  \mathrm{Re}\left\{ i\hat \psi^* \frac{ \partial  \hat \psi }{\partial r}\right\}  d\theta\right\}.
+\end{equation}
+
+
+\medskip 
+
+For the explicit calculation of the entrained mass, the only relevant result derived up to this point is the inner solution,  Eq. (\ref{innergeneralcase}), which yields 
+\begin{equation}
+(\psi_R)_{r=a} =  \frac{2}{\pi} \left\{ \ln (k_p a) - K_{2,G} + \gamma  + \sum_{n=1}^\infty 
+\frac{\cos 2 n \theta}{n[(2n)^2 -1]} \right\}.
+\end{equation}
+ 
+
+\medskip 
+
+When doing the integral in Eq. (\ref{entrainedInnerIntegral}), one can make use of the previously derived integration results, so that
+\begin{equation}
+ m_\mathrm{ent} = 
+ \frac{4 \rho a^2}{\pi}\left(- \ln(k_p a)+ K_{2,G} - \gamma + S\right),
+ \end{equation}
+ where $S$ is 
+ the sum
+ \begin{equation}
+ S = \sum_{n=1}^\infty \frac{1}{n [(2n)^2 -1]^2}
+ \end{equation}.
+ 
+ 
+ \medskip
+ 
+ The sum just identified converges very quickly, so that numerical evaluation is rather easy.  However, one   conjectures that this sum can be expressed in closed  form in terms of elementary constants.    Whatever this closed form result may be, it probably will not be easily derived from scratch by a typical worker in mathematical acoustics.  Consequently, one might begin by consulting some standard reference book, the most commonly consulted in this respect being the book of tabulations by Gradshteyn and Ryzhik.\citep{Gradshteyn}  If one consults that book, one does indeed find a stated result on p. 8, giving
+ \begin{equation} \label{S_sum}
+ S = \frac{3}{2} - 2\ln2 = 0.11371\dots.
+ \end{equation}
+ As might be expected for a handbook, the authors do not give a derivation, but refer the reader to the second revised edition (1926, latest reprinting 1959) of Bromwich's\citep{Bromwich}  \emph{An Introduction to the Theory of Infinite Series}.  A systematic search through that book leads one to  page 52, where there is an Exercise 22, the second part of which commands the reader to ``shew that'' the result quoted above  is correct.  (The result is not given in the first edition, 1908, of Bromwich's book.)  
+ 
+ \medskip
+ 
+Following the dictums set down in the earlier portions of the present paper, Bromwich's result is not accepted blindly, and the ``shew that'' command is here dutifully carried out.  One notices that the function of $n$ representing the terms in the summation is amenable to a partial fraction decomposition, so that
+\begin{equation} \label{partialfraction}
+\frac{1}{n[(2n)^2 -1]^2} = \frac{1}{n} - \frac{1}{2n-1}  - \frac{1}{2n+1} + \frac{1}{2(2n-1)^2}  - \frac{1}{2(2n+1)^2}  
+ \end{equation}
+ That  this is so follows from the algebraic identity
+ \begin{equation}
+ (2n+1)^2(2n-1)^2  - n  (2n-1) (2n+1)^2 -n  (2n-1)^2(2n+1)\qquad \qquad\qquad\qquad
+ \nonumber
+ \end{equation}
+ \begin{equation}
+  \qquad\qquad \qquad \qquad + (n/2)(2n+1)^2 -(n/2)(2n-1)^2 = 1.
+\end{equation}
+The sums over each of the first three of the indicated partial fractions diverges, but one can nevertheless anticipate that the sum of the partial sums converges, so one writes
+\begin{equation}
+S = \lim_{N\to \infty} S_N, \qquad
+ S_N = \sum_{n=1}^N\frac{1}{n [(2n)^2 -1]^2}.
+ \end{equation}
+ In regard to the last two partial sums resulting from the partial fraction decomposition of Eq.
+ (\ref{partialfraction}), up to $n=N$, one notes that there is a sizable cancellation of terms, so that
+ \begin{equation}
+ \sum_{n=1}^N \frac{1}{2(2n-1)^2}  - \sum_{n=1}^N \frac{1}{2(2n+1)^2}   = 
+ \frac{1}{2} - \frac{1}{2(2N+1)^2}.
+ \end{equation}
+ The last term approaches $0$ as $N\to\infty$, so the difference of these two sums approaches $1/2$.
+ 
+ \medskip
+ 
+For the sum over the first three partial fractions, one anticipates that some mathematical simplification may result if one expresses all the requisite partial sums up to $n=N$
+in terms of the generic sum
+\begin{equation}
+\sigma_{{}_M} = \sum_{m=1}^M \frac{1}{m},
+\end{equation}
+where $M$ may be different for different terms, but simply related to $N$.  Thus
+\begin{equation}
+\sum_{n=1}^N \frac{1}{2n -1} = 1 + \frac{1}{3} + \dots + \frac{1}{2N-1} \qquad\qquad\qquad\qquad
+\nonumber
+\end{equation}
+\begin{equation}
+\qquad\qquad\qquad\qquad= 
+\left[1 + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{2N} \right] - \left[\frac{1}{2} + \frac{1}{4} + \dots + \frac{1}{2N} \right],
+\end{equation}
+and this in turn can be re-expressed in terms of the $\sigma_{{}_M}$-sums as
+\begin{equation}
+\sum_{n=1}^N \frac{1}{2n -1} = \sigma_{{}_{2N}} - \frac{1}{2} \sigma_{{}_N}.
+\end{equation}
+   Similarly, one finds
+\begin{equation}
+\sum_{n=1}^N \frac{1}{2n +1} =  \frac{1}{3} + \dots + \frac{1}{2N + 1} 
+\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad \qquad\qquad
+\nonumber
+\end{equation}
+\begin{equation}
+\qquad\qquad\qquad\qquad  = 
+\left[1 + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{2N +2} \right] - \left[\frac{1}{2} + \frac{1}{4} + \dots + \frac{1}{2N+ 2} \right] - 1,
+\end{equation}
+ \noindent
+so that
+\begin{equation}
+\sum_{n=1}^N \frac{1}{2n + 1} = \sigma_{2N+ 2} - \frac{1}{2} \sigma_{N+1} -1.
+\end{equation}
+One consequently has
+\begin{equation} \label{SsubNintermsofsigmas}
+S_{{}_N} = \frac{3}{2}\sigma_{{}_N}+ \frac{1}{2}\sigma_{{}_{N+1}}  - \sigma_{{}_{2N}} - \sigma_{{}_{2N+2}} + \frac{3}{2} - \frac{1}{2(2N+1)^2}.
+\end{equation}
+
+The next step results from the realization that a sum can often be approximated by an integral, so  one can guess that
+\begin{equation}
+\sigma_{{}_N} \approx \int_1^N \frac{1}{x}dx = \ln N,
+\end{equation}
+where the difference of the number on the two sides, for large $N$, is small compared to either number.  With this as a guide, one defines a function
+\begin{equation} \label{def_tau_N}
+\tau_{{}_N} = \sigma_{{}_N} - \ln N
+\end{equation}
+that one can expect to be  bounded in the limit of large $N$.
+One can next ask how this function depends on $N$ when $N \gg 1$.
+To this purpose one examines the difference
+\begin{equation} 
+\tau_{{}_N} - \tau_{{}_{N-1} }= \frac{1}{N} - \ln N  + \ln(N-1)= \frac{1}{N} + \ln\left(1 - \frac{1}{N}\right).
+\end{equation}
+Because $1/N$ is small, the logarithm in the last expression can be expanded in a power series, with the leading order result
+\begin{equation} 
+\tau_{{}_N} - \tau_{{}_{N-1}} \approx  -\frac{1}{2N^2}.
+\end{equation}
+Because this difference goes as $1/N^2$, rather than $1/N$, one concludes that the function $\tau_{{}_N}$ approaches a constant, independent of $N$ at large $N$.
+In the expression of Eq. (\ref{SsubNintermsofsigmas}), these constants will all cancel out, so one has, at large $N$,
+\begin{equation}
+S_N \to \frac{3}{2} + \frac{3}{2}\ln N + \frac{1}{2} \ln(N+1) -  \ln (2N) - \ln(2 N +2).   \end{equation} 
+Also, in the same limit, 
+\begin{equation}
+  \ln(N+1) \approx  \ln N + \frac{1}{N},
+\end{equation}
+and one notes that
+\begin{equation}
+\ln 2N = \ln N + \ln 2.
+\end{equation}
+Thus, the terms proportional to $\ln N$ cancel, and one obtains
+\begin{equation}
+S = \frac{3}{2} - 2 \ln 2.
+\end{equation}
+which is the same as is asserted in Eq. (\ref{S_sum}).
+ 
+ 
+ \medskip
+ 
+ With the substitution for the expression for the sum $S$, the entrained mass becomes
+ \begin{equation}
+ m_\mathrm{ent} = \frac{4 \rho a^2}{\pi} \left( - \ln ka +K_{2,G} - \gamma + \frac{3}{2} - 2 \ln 2\right).
+ \end{equation}
+   
+ 
+ 
+ \medskip
+\noindent
+{\bf\emph{Comparison with Ursell's ``results''}}
+\medskip
+
+
+ 
+For the limiting case of a half-submerged cylinder floating on an incompressible ocean [see the discussion above that begins with Eq. (\ref{gravityspringconstant})], the above result for the  entrained  mass reduces to 
+\begin{equation}
+ m_\mathrm{ent} = \frac{4 \rho a^2}{\pi} \left( - \ln (\omega^2 a/g)   - \gamma + \frac{3}{2} - 2 \ln 2\right).
+ \end{equation}
+This  is smaller by a factor of $2/\pi$ from what is stated without proof in a 1949 paper by Ursell.\citep{Ursell1949}  In the middle of page 224, Ursell states that the ``virtual mass'' is $2\rho a^2
+m(Ka)$, where $m(Ka)$ is a dimensionless quantity that emerges during the course of a lengthy analysis. At the top of page 225, he states that, ``it can be shown that, as $Ka \to 0$,''
+\begin{equation}
+m(Ka)- \ln \frac{1}{Ka} \to 3/2 - 2 \ln 2 - \gamma.
+\end{equation}
+The present authors' interpretation of Ursell's nomenclature and terminology is that his ``virtual mass'' is the same as the entrained mass of the present paper, and that his $Ka$ is the same as the $k_\mathrm{surf}a = \omega^2 a/g$ of the present paper.  Given such an interpretation, his limiting expression for the virtual mass is missing a factor of $2/\pi$.
+
+
+\medskip  In a later paper (1976) concerned primarily with oscillating cylinders on water of finite depth,\citep{UrsellFiniteDepth} Ursell refers to a \emph{virtual-mass coefficient} as being described by the ``force component in phase  with the acceleration of the body,'' and later in the paper he  states that the ``well known corresponding [result] for infinite depth when $Ka\to0$ [is]''
+ \begin{equation}
+\mbox{virtual-mass coefficient} = \frac{8}{\pi^2}\ln\frac{1}{Ka} + O(1)
+\end{equation}
+In related earlier literature, one finds remarks in the book by Milne-Thomson\citep{Milne} that suggest the virtual-mass coefficient is the ratio of the entrained mass to the mass of fluid displaced by the body.  This would suggest that Ursell's 1976  identification of the entrained mass would be
+\begin{equation} 
+m_\mathrm{ent} = \frac{1}{2}\rho\pi a^2 \left\{\frac{8}{\pi^2}\ln\frac{1}{Ka} + O(1)\right\}
+\end{equation}
+With an appropriate identification of the terms of $O(1)$, this expression is the same as that derived in the present paper.  
+
+\medskip
+
+
+Consequently, it can be stated that (i) Ursell probably knew the correct expression in 1949, but he did not check his submitted manuscript and/or galley proofs sufficiently carefully to recognize the transcription error in the 1949 paper, and  (ii) his statements from the 1976 paper as given above are correct.
+
+\begin{theorem}
+If you come across a mathematical result in the literature which an author gives without proof and says that it can be shown, do not accept the author's assertion.  Either ignore the result or derive it afresh by yourself.  If an author states a result and asserts that it is well-known, but doesn't actually give a reference, and if you haven't seen the result before, assume that the author's definition of well-known is based on  a relatively parochial set of acquaintances. Either ignore the stated mathematical result or derive it afresh by yourself.
+\end{theorem}
+
+ \medskip
+\noindent
+{\bf\emph{Further note regarding the Euler-Mascheroni constant}}
+\medskip
+
+
+As asserted above, the quantity $\tau_{{}_N}$ must approach a constant in the limit of large $N$.  To determine that constant one makes use of the mathematical identities
+\begin{equation}
+\frac{1}{n} = \int_{o}^{1} x^{n-1} dx,
+\end{equation}
+\begin{equation}
+\sum_{n=1}^{N} x^{n-1} = \frac{1 - x^N}{1 - x},
+\end{equation}
+so that the $\tau_{{}_N}$ of Eq. (\ref{def_tau_N}) becomes
+\begin{equation}
+\tau_{{}_N} = \int_o^1 \frac{1 - x^N}{1 - x} dx - \int_1^N \frac{1}{q} dq.
+\end{equation}
+In the first integral, one changes the variable of integration to $q$, where $x = 1 - (q/N)$, so that
+\begin{equation}
+\tau_{{}_N} = \int_{0}^N    \frac{1 - (1 - [q/N])^N}{q}  dq -   \int_1^N \frac{1}{q} dq.
+\end{equation}
+The first integral is broken up into two parts, an integration from $0$ to $1$, plus an integration from $1$ to $N$, and the second portion is combined with the second integral, so that
+\begin{equation}
+\tau_{{}_N} = \int_{0}^1    \frac{1 - (1 - [q/N])^N}{q}  dq -   \int_1^N \frac{(1 - [q/N])^N}{q}dq.
+\end{equation}
+One rewrites this as 
+    \begin{equation}
+\tau_{{}_N}= \int_{0}^1    \frac{1 - (1 - [q/N])^N}{q}  dq -  \int_1^N \frac{e^{-q}}{q} dq
++  \int_1^N\frac{e^{-q} - (1 - [q/N])^N}{q}dq .
+\end{equation}
+The third term can be written in turn as
+\begin{equation}
+\int_1^N\frac{e^{-q} - (1 - [q/N])^N}{q}dq  = \int_1^M\frac{e^{-q} - (1 - [q/N])^N}{q}dq +
+\int_M^N  \frac{e^{-q} - (1 - [q/N])^N}{q}dq, 
+\end{equation}
+where $M$ is a very large integer, and where attention is limited to values of $N$ that are much larger than $M$.  Limits are taken in the sequence $N \to \infty$ followed by $M\to \infty$.  
+
+\begin{theorem}
+If it is desirable to apply some limiting operation to an integral and the operation is not valid for all ranges of the integration, try splitting the integral into two parts, with some judicious choice as to where the split is taken.
+\end{theorem}
+
+
+
+For the second tern above, the integral for finite $M$ is bounded by
+\begin{equation}
+\left|  \int_M^N\frac{e^{-q} - (1 - [q/N])^N}{q}dq \right| < \int_M^\infty \frac{e^{-q}}{q} dq
+< \frac{e^{-M}}{M} ,
+\end{equation}
+and this goes to $0$ as $M \to \infty$.
+For the remaining terms, one recognizes   the definition ($e^o = 1$ and $de^x/dx = e^x$) of the base $e$ of natural logarithms requires 
+\begin{equation}
+ \lim_{N\to \infty} (1 - [q/N])^N = e^{-q}
+\end{equation}
+for all finite $q$. (This is easily proven by showing that the derivative with  respect to $q$ is $-q$ times the original expression in the same limit, along with the observation that the value is $1$ when $q=0$.) Consequently, one arrives at the conclusion that
+\begin{equation}
+ \lim_{N\to \infty} \left\{ 1 + \frac{1}{2} + \dots + \frac{1}{N} - \ln 
+N\right\} =   \int_{0}^1    \frac{1 - e^{-q}}{q}  dq -  \int_1^\infty \frac{e^{-q}}{q} dq = \gamma,
+\end{equation}
+where $\gamma$ is the Euler-Mascheroni constant.  (The proof given above was suggested somewhat by a discussion in the latter part of Bromwich's book.\citep{BromwichLatter})
+
+
+\medskip
+ \noindent
+{\bf\emph{Radiation resistance derived from inner solution}}
+\medskip
+
+
+The inner solution of Eq. (\ref{innergeneralcase}) has a nonzero imaginary part in the first approximation, so that
+\begin{equation} 
+\psi_I =-\frac{2}{\pi} \left( J_{1,G} +  \pi \frac{k_\mathrm{surf}}{k_p}
+\right)
+\end{equation}
+Consequently, Eq. (\ref{RfromInnerSoln}) yields 
+\begin{equation} \label{firstExpressionForR}
+R = 4 \omega \rho a^2 \left( \frac{1}{\pi}J_{1,G} +   \frac{k_\mathrm{surf}}{k_p}\right)
+\end{equation}
+for the radiation resistance.   
+\medskip
+
+For the limiting case $k_\mathrm{surf} \to 0$ (rigid-baffle case), this reduces to 
+\begin{equation} \label{radiationresistancerigidbaffle}
+R \to 2\omega \rho a^2,
+\end{equation}
+while for the limiting case of $k_\mathrm{ac} \to 0$ (incompressible-fluid case), it reduces to
+\begin{equation} \label{radiationresistanceincompressiblefuid}
+R \to 4 \omega \rho a^2.
+\end{equation}
+One may note that neither of these results involve a wave speed, and they differ by a factor of $2$.
+
+ \medskip
+
+\section{FAR FIELD SOLUTIONS AND RADIATION RESISTANCE}
+
+For the two limiting cases considered, convenient approximations emerge from the outer solution when one considers the radial distance $r$ to be much larger than a representative wavelength.  Such approximations are especially convenient in the estimation of the radiation resistance encountered by the oscillating cylinder.  if such estimates agree with  those derived from the inner solution,  one has some indication that no mistakes were made in either derivation.
+
+
+\subsection{Far field for the rigid-surface caee}
+
+
+For the case when the bounding interface at $y=0$  is  rigid, the outer solution is given by
+ \begin{equation}   \psi_{1,\mathrm{out}} = - \frac{1}{\pi}\int_{-\infty}^{\infty} \frac{1}{R}e^{ik_\mathrm{ac} R } dz_o = - i H_o^{(1)}(k_\mathrm{ac}r).
+ \end{equation}
+To evaluate this at large $k_\mathrm{ac}r$, it is appropriate to (i) find a saddle point\citep{saddle}${}^,$\citep{Jeffreys}${}^,$\citep{Mathews} in the exponent, and (ii) deform the contour nominally going along the real axis to one that goes along the path of steepest descents on either side of the saddle point, plus additional contour segments at ``infinity,'' so that the new contour  is truly a deformation of the original contour, and (iii) approximate the integration consistent with the limit $k_\mathrm{ac} r \gg 1$.  This is discussed in various textbooks, but the second step is often glossed over somewhat.  Keeping with the general spirit of the present paper, the analysis here proceeds with some care.
+
+\medskip
+
+The saddle point is where the derivative of $k_\mathrm{ac}R$ with respect to $z_o$ is zero, and this is readily seen to be at $z_o = z$.  To explore the nature of the path of steepest descents, one regards $\zeta = (z_-z_o)/r$ as a complex variable and considers
+\begin{equation}
+\mathscr{R}(\zeta) = \left( 1 + \zeta^2\right)^{1/2}
+\end{equation}
+as a function of the complex variable $\zeta$.  This is defined so that $k_\mathrm{ac} R = k_\mathrm{ac} r \mathscr{R}$. The function is understood to be real and positive when $\zeta = 0$ and to be analytic in the vicinity of the origin. It is also understood to be real and positive all along the real axis in the complex-$\zeta$ plane  There are branch-points at $\zeta = \pm i $, and branch-cuts need be chosen.  These are taken so that they do not cross the real axis; the one originating at $i $ extends vertically upwards, and the one originating at $-i $ extends vertically downwards.  
+
+\medskip
+
+The function $\mathscr{R}(\zeta)$ has real and imaginary parts, and one readily derives, after equating real and imaginary parts of the square of $\mathscr{R}$ to those of $1 +\zeta^2$, 
+\begin{equation}
+\mathscr{R}_R^2 - \mathscr{R}_I^2  = 1 + \zeta_R^2 - \zeta_I^2, \qquad  \mathscr{R}_R \mathscr{R}_I =
+\zeta_R \zeta_I.
+\end{equation}
+The path of steepest descents, whatever it may be, has to be such that the real part $\mathscr{R}_R$ is constant all along the path.  Since the path passes through the origin in the $\zeta$-plane, one has $\mathscr{R}_R =1$ all along the path.  The above equations then yield, as   possible equations for the path,
+\begin{equation}
+\zeta_I  =\pm  \frac{\zeta_R }{ \left(1  - \zeta_R^2\right)^{1/2}},
+\end{equation}
+where the appropriate sign remains to be selected.
+
+\medskip
+
+The desired sign is that for which the imaginary part of $\mathscr{R}$ increases monotonically with distance from the saddle point along the path, so that the magnitude of the exponential function decreases monotonically.    The plus sign is readily seen to be the appropriate selection, and one has
+\begin{equation}
+\mathscr{R}_I = \frac{\zeta_R^2 }{ \left(1  - \zeta_R^2\right)^{1/2}}.
+\end{equation}
+The upper branch of the path asymptotes to the line $\zeta_R = 1$, and the lower branch asymptotes to the line $\zeta_R = -1$.   
+\medskip
+
+At this point, one must check that the requisite contour arcs at infinity vanish.     What is most relevant in this regard is that the  arcs are  in the first and third quadrants of the complex plane.  Symmetry allows one to restrict one's attention to just the segment in the first quadrant (where the phase $\phi$ ranges from $0$ to $\pi/2$), and the assertion is made that the contribution from these two arcs vanish providing
+\begin{equation}
+\lim_{M\to \infty}\left\{\int_o^{\pi/2} e^{- M \sin \phi} d\phi\right\} = 0.
+\end{equation}
+That this is indeed the case follows from the observations that (i)
+$\sin\phi > (2/\pi)\phi$ over the range of integration, and (ii) the integral goes to zero  as $M\to \infty$ when $\sin\phi$ in the exponent  is replaced by the smaller quantity. 
+
+\medskip
+
+One consequently arrives at the ``exact'' result,
+\begin{equation}  
+ \psi_{1,\mathrm{out}} =- i H_o^{(1)}(k_\mathrm{ac}r) =  - \frac{1}{\pi}e^{ik_\mathrm{ac}r} \int_C\frac{1}{\mathscr{R}} e^{-k_\mathrm{ac}r \mathscr{R}_I } d\zeta  ,
+\end{equation}
+where the integration contour is as described above.  If one next lets
+$s$ be distance along the contour in the positive sense from the saddle point, then
+\begin{equation}
+d\zeta =\left( \frac{d\zeta_R}{ds} + i \frac{d\zeta_I}{ds}\right) ds, \qquad
+ s = \int_0^{\zeta_R} \left\{ 1 + [1 - \zeta_R^2]^{-3} \right\}^{1/2}d \zeta_R.
+  \end{equation}
+  For large $kr$, the integral converges rapidly, so over the range where the integrand has non-negligible value,
+  \begin{equation}
+  \zeta_R \approx \zeta_I \approx \frac{1}{\sqrt 2} s, \qquad \mathscr{R}_I
+  \approx \frac{1}{2} s^2,
+ \end{equation} 
+ the integral consequently approximates to 
+ \begin{equation}  
+ \psi_{1,\mathrm{out}} =- i H_o^{(1)}(k_\mathrm{ac}r)\approx  - \frac{1 + i}{\pi\sqrt 2}e^{ik_\mathrm{ac}r} \int_{-\infty}^\infty e^{-[k_\mathrm{ac} r/2] s^2} ds,
+\end{equation}
+or
+ \begin{equation}  
+ \psi_{1,\mathrm{out}} \approx - \left(\frac{2}{\pi k_\mathrm{ac}r}\right)^{1/2} e^{i\pi/4} e^{ik_\mathrm{ac} r} .
+ \end{equation}
+ This is the desired far-field solution.
+ 
+\medskip
+ \noindent
+{\bf\emph{Radiation resistance derived from outer solution}}
+\medskip
+
+
+The above derived expression leads to 
+\begin{equation} 
+i \hat \psi^* \frac{\partial \hat \psi}{\partial r} \to  -k_\mathrm{ac} \left(\frac{2}{\pi k_\mathrm{ac} r}\right) ,
+\end{equation}
+so Eq. (\ref{RexpressedOuterSoln}) subsequently yields
+\begin{equation}  \label{firstevaluationofR}
+R =  2 \omega \rho a^2.
+\end{equation}
+This has been derived from the outer solution, but it is the same as that of Eq. (\ref{radiationresistancerigidbaffle}), which was derived from the inner solution.  The agreement of the two expressions substantiates the method, at least for the limiting case when the compliant baffle is a rigid surface.
+ 
+ 
+ 
+ 
+ \subsection{Far field for the incompressible-fluid case}
+ 
+ 
+ For the limiting case when the fluid is incompressible, so that $k_\mathrm{ac} \to 0$ and $k_p \to k_\mathrm{surf}$,  the quantity 
+ $\chi^+$ in the integrand  of the   integral in Eq. (\ref{branchlineintegralterm}) reduces to  $-s$, so that, after factoring out a factor of $-i$ in the denominators, one has
+ \begin{equation} 
+[\mathrm{BLI}] =  -\frac{2i}{\pi}\int_o^\infty \left\{ \left(\frac{ e^{-s(|x|+iy)}  }{ s+ i  k_\mathrm{surf} }\right) +\left( \frac{ e^{-s(|x|-iy)}  }{ s - ik_\mathrm{surf} }\right)\right\}  \, ds.
+\end{equation}
+ The two terms in the integrand are recognized as complex conjugates of each other, so the above can be re-expressed as
+  \begin{equation} 
+[\mathrm{BLI}] =  -\frac{4i}{\pi}\, \mathrm{Re}\left(\int_o^\infty   \frac{ e^{-s(|x|+iy)}  }{ s+ i  k_\mathrm{surf} } \,ds \right)  .
+\end{equation}
+ At this point, one can change the integration variable to $p = (|x| +iy)s $ and rotate the integration contour to one along which the integration variable $p$ is real, so that $p$ ranges for $0$ to $\infty$. The expression then takes the form
+  \begin{equation} 
+[\mathrm{BLI}] =  -\frac{4i}{\pi}\, \mathrm{Re}\left(\int_o^\infty   \frac{ e^{-p}  }{ p+ i  \Delta} \,dp \right)  ,
+\end{equation}
+ with the abbreviation
+ \begin{equation}
+ \Delta = (|x| + i y)k_\mathrm{surf}
+ \end{equation}
+ 
+ \medskip
+ 
+ The far-field limit corresponds to $|\Delta | \gg 1$, and one derives the far-field limit (as the first term in an asymptotic expansion) for the above result by  replacing the denominator $p + i\Delta$ in the integrand by $i\Delta$, so that
+   \begin{equation} 
+[\mathrm{BLI}] \approx  -\frac{4i}{\pi}\, \mathrm{Re}\left(\frac{1}{i\Delta}\int_o^\infty    e^{-p}    \,dp \right)  = -\frac{4 i}{\pi} \left(- \frac{y}{k_\mathrm{surf} r^2}\right)
+\end{equation}
+When this is inserted into Eq. (\ref{outergeneralcase}), one finds the far-field result
+\begin{equation}
+\psi_{1, \mathrm{out}} \to   \frac{2}{\pi }\frac{y}{k_\mathrm{surf} r^2} - 2i e^{-k_\mathrm{surf} y} e^{ik_\mathrm{surf} |x|}
+\end{equation}
+  \medskip
+
+The first term can be interpreted as a quasi-static pressure disturbance.  It has constant phase and is zero at the fluid surface. It depends on the cylindrical coordinates $r$ and $\theta$ as $(1/r)\sin\theta$.   This is a solution of Laplace's equation and describes the pressure field of a line dipole source.
+
+\medskip
+
+
+
+The second term describes a surface wave propagating out from the cylinder location along the interface.  The amplitude is constant at the surface and decreases exponentially with depth.  Only this second term corresponds to a transport of energy away from the source, and one has
+\begin{equation}
+  \mathrm{Re}\left\{ i\hat \psi^* \frac{ \partial  \hat \psi }{\partial r}\right\} \approx -4 k_\mathrm{surf} \left| \cos \theta \right| e^{-2 k_\mathrm{surf} y}.
+\end{equation}
+  
+ 
+ 
+\medskip
+ \noindent
+{\bf\emph{Radiation resistance derived from outer solution}}
+\medskip
+
+To evaluate the radiation resistance from the far-field expression, it is convenient to use cartesian coordinates, as the propagating surface wave is more conveniently described in such a coordinate system. This causes the expression of Eq. (\ref{RexpressedOuterSoln}) to be replaced by 
+\begin{equation}
+R = -2\omega \rho a^2 \lim_{|x|\to \infty} \int_o^\infty  \mathrm{Re}\left\{ i\hat \psi^* \frac{ \partial  \hat \psi }{\partial |x|}\right\}  dy  .
+\end{equation}
+The extra factor of $2$ is because there is an outward radiating surface wave on both sides of the oscillating cylinder.
+
+\medskip
+
+This expression above for the radiation resistance per unit length subsequently evaluates to 
+ \begin{equation} \label{secondevaluationofR}
+ R = 8\omega \rho a^2 k_\mathrm{surf} \int_o^\infty e^{- 2 k_\mathrm{surf} y} \, dy = 4 \omega \rho a^2.
+ \end{equation}
+ This is the same as given by Eq.  (\ref{radiationresistanceincompressiblefuid}), so one has reasonable confidence  that both derivations are correct.
+ 
+ 
+ \medskip
+ 
+ [When the foregoing analysis was initially carried out, the two answers did not agree.  This of course raised a flag as to  there  being a mistake.  Since the chain of reasoning was somewhat lengthy, finding the mistake was a nontrivial task, but care and persistence paid off, and the mistake was found  and rectified.]
+ 
+ \begin{theorem}
+ 
+ Try to check any analytical result you derive by thinking of a an alternate path of analysis, and then derive the result  using the alternate method.  If the two answers don't agree, then check both derivations and determine why they do not agree.
+ 
+ \end{theorem}
+   
+ \medskip
+ 
+  \section{CONCLUDING REMARKS}
+ 
+ \setlength{\parindent}{5ex}
+ 
+ 
+ \begin{theorem}
+ Whenever you reach a point where you    have brought the solution of a problem to what you believe to be  a satisfactory (possibly only on an interim basis) form, try to test the solution to see if it conforms to basic principles.
+ \end{theorem}
+ 
+ Conservation of energy is evident in the solutions for both examples.  The radiation resistance is positive, so the oscillating cylinder inputs power into the system, and this results in energy being carried away by outwardly propagating waves.
+ 
+ \medskip
+ 
+ The natures of the   waves that are involved  are distinctly revealed by the far-field approximations for the outer solutions.  The waves have characteristic features identical to those found in elementary derivations without explicit consideration of sources.
+ 
+ \medskip
+ 
+ \begin{theorem}
+ Look at your solution and see if you can spot anything that seems surprising, and then make an attempt to convince yourself that the surprise, after the fact, really should have been expected.
+ \end{theorem}
+ 
+ A perhaps surprising feature of the far-field solution for the limiting case when the fluid is incompressible  is the prediction of a non-propagating pressure perturbation below the source.  This complements the physical constraint that the only propagating waves must be surface waves.  The pressure perturbation below the surface oscillates with the same frequency as the   cylinder and has the same phase throughout the fluid as the cylinder displacement.  That the phases are the same should be consistent with one's intuition; in the quasi-static limit, a downward displacement of the cylinder causes an almost instantaneous pressure rise in the fluid.  It would, of course, not be instantaneous if the finite sound speed in the fluid were taken into account.
+ 
+\medskip
+
+The derived form of the expressions for the entrained mass (per unit cylinder length)  presents some challenges at attempts to give the results a physical interpretation.  The entrained mass ostensibly corresponds to the time average $\langle \mathrm{KE} \rangle$ of the kinetic energy of the fluid in the near-field of the cylinder, so that
+\begin{equation}
+\langle \mathrm{KE} \rangle \approx \frac{1}{2} m_\mathrm{ent} \langle V^2 \rangle,
+\end{equation}
+and consequently one expects the entrained mass to be positive.  However, the logarithm term in the entrained mass expression is negative for arguments less than unity  and positive for arguments greater than unity, and this feature causes the derived expression for entrained mass to become negative at higher frequencies. What one should do, at this point, is to remind oneself that  the concept of an entrained mass has applicability only at low frequencies, and the derivation was carried out expressly to obtain a result applicable for low frequencies.   While no effort was made to put upper limits on the frequencies for which the low frequency approximation is applicable, one anticipates that it will not be applicable at any frequency above that for which the expression for the entrained mass first becomes negative.
+
+\begin{theorem}
+At some point in an analysis of a problem, given that a reasonable story has been put together at that point, one has to decide whether to try to squeeze out more insight with analysis or to stop, or perhaps pause for an interminable time period.
+\end{theorem}
+
+
+The authors believe that they have now reached a reasonable stopping point, and hope that the readers may have learned something from thinking about the dictums that have been intertwined with the solution of a generic nontrivial  problem in mathematical acoustics.  
+
+ 
+ 
+
+\medskip
+
+  
+ \noindent \textbf{Acknowledgements}
+ 
+ \setlength{\parindent}{0.7cm} 
+ 
+ The authors have discussed the substance of this paper with several  of their colleagues.  At the risk of omitting some relevant names, they would like to especially thank James G. McDaniel, William M. Carey, William L. Siegmann, and  Richard B. Evans.  Amadou G. Thiam would like to thank the General Electric Company for its support of his efforts associated with the work reported here.
+
+
+  
+ 
+   
+ \begin{thebibliography}{99}
+ 
+ 
+ \bibitem{Polya} G. Polya, \emph{How to Solve It:  A New Aspect of Mathematical Method} (Princeton University Press, 1945; Second, Edition, 1957), pp. xvi--xvii,
+ pp. 33--36.
+ 
+
+ \bibitem{Bacon}  F. Bacon, \emph{The Advancement of Learning}, first published in 1605, edited by G. W. Kitchin, 1861, various editions (J. M. Dent and Sons, London, 
+ Rowman and Littlefield, Totawa, 1974), pp. 189--203.
+ 
+
+ \bibitem{Descartes1} R. Descartes, ``Rules for the direction of the mind,'' written 1629, translation E. S. Haldane and G. T. R. Ross, in \emph{Great Books of the Western World} \textbf{31}, \emph{Descartes,
+ Spinoza} (Encyclopedia Britannica, Chicago, 1952), pp. 1--40.
+ 
+  \bibitem{Descartes2} R. Descartes, ``Rules for the guidance of our native powers''  (Regulae ad directionem ingenii),  written 1629, N. K. Smith, translator, in \emph{Descartes: Philosophical Writings} (The Modern Library, Random House, New York, 1958), pp. 1--89.
+
+ 
+ 
+  \bibitem{Descartes3} R. Descartes,``Discourse on the method of rightly conducting the reason and seeking for truth in the sciences,'' written 1636, translation by E. S. Haldane and G. T. R. Ross, in \emph{Great Books of the Western World}, Vol. 31, \emph{Descartes,
+ Spinoza} (Encyclopedia Britannica, Chicago, 1952), pp. 41--67.
+ 
+    
+  \bibitem{Descartes4} R. Descartes, ``Discourse on the method of rightly conducting the reason and seeking for truth in the sciences'' (Discours de la m\'ethode pour bien conduire sa raison, et chercher la verit\'e dans les sciences), written 1636, N. K. Smith, translator, in \emph{Descartes: Philosophical Writings} (The Modern Library, Random House, New York, 1958), pp. 91--144.
+  
+  
+  \bibitem{FORTRAN} H. F. Ledgard and L. J. Chmura, 
+  \emph{FORTRAN with Style: Programming Proverbs} (Hayden Book Company, 
+ Rochelle Park, NJ, 1978), pp. 3--54.
+ 
+ \bibitem{PASCAL}  H. F. Ledgard, P.  A. Nagin, and J.  F. Hueras, \emph{PASCAL with Style: Programming Proverbs} (Hayden Book Company, 
+ Rochelle Park, NJ, 1979), pp. 3--59.
+ 
+ \bibitem{Mirriam} \emph{Merriam--Webster's Collegiate Dictionary}, 11-th Ed. (Merriam--Webster, Springfield, MA, 2003), p. 347.
+ 
+ \bibitem{PistonInWall}  A. D. Pierce, \emph{Acoustics: An Introduction to its Physical Principles and Applications}, first published 1981 (currently published by Acoustical Society of America, Melville, NY, 1994), pp. 208--245.
+
+ 
+ 
+  \bibitem{Rayleigh_dissipation} J. W. S. Rayleigh,  ``The form of standing waves on the surface of running water,''  Proc.    London  Math. Soc.
+ \textbf{15}, 69--78 (1883).
+ 
+ 
+ \bibitem{PierceAcousticGravity} A. D. Pierce, ``Propagation of acoustic-gravity waves from a small source above the ground in an isothermal atmosphere,'' J. Acoust. Soc. Am. \textbf{35},   1798--1807 (1963).
+ 
+  \bibitem{PierceAcoustics1} A. D. Pierce, \emph{Acoustics: An Introduction to its Physical Principles and Applications}, first published 1981 (currently published by Acoustical Society of America, Melville, NY, 1994), pp. 171--177.
+  
+ \bibitem{Embleton} T. F. W. Embleton, J. E. Piercy, and N. Olson, ``Outdoor sound propagation over ground of finite impedance,'' J. Acoust. Soc. Am. \textbf{59}, 267--277 (1976).
+  
+  \bibitem{Kirchhoff} G. Kirchhoff, \emph{Vorlesungen \"uber mathematische Physik: Mechanik} (Lectures on Mathematical Physics: Mechanics), 2nd Ed. (Teubner, Leipzig, 1877), pp. 311, 316.
+  
+  \bibitem{Thiam} A. G. Thiam and A. D. Pierce, ``Damping mechanism concepts in ocean wave energy conversion:  A simplified model of the Pelamis converter,'' Proc. Mtgs. Acoust. \textbf{9}, 065002 [DOI: 10.1121/1.3449331] (2010).
+  
+  \bibitem{Rayleigh_sound_water} J. W. S. Rayleigh, \emph{The Theory of Sound}, Vol. 2, second edition, 1896 (reprinted Dover, New York, 1945), pp. 343--344.
+  
+  \bibitem{Lindsay}  R. B. Lindsay, \emph{Mechanical Radiation}
+  (McGraw-Hill Book Co., New York, 1960), pp. 196--200.
+     
+  
+  \bibitem{Levine}  H. Levine and J. Schwinger, ``On the radiation of sound from an unflanged circular 
+  pipe,'' Phys. Rev. \textbf{73},  383--406 (1948).
+  
+  \bibitem{RayleighResonance} J. W. Strutt (later, Lord Rayleigh), ``On the theory of resonance,'' Phil. Trans. Roy. Soc. London \textbf{161},  77-118 (1871).
+  
+
+ 
+ 
+ \bibitem{Bouwkamp} C. J. Bouwkamp,  ``A contribution to the theory of acoustic radiation,'' Philips Res. Reports \textbf{1}, 251--277 (1946).
+ 
+ \bibitem{RayleighComplex} J. W. S. Rayleigh, \emph{The Theory of Sound}, Vol. 1, first edition, 1877, second edition, 1894 (reprinted Dover, New York, 1945), pp. 145--146.
+ 
+   
+ \bibitem{Fourier} G. E. Latta, ``Transform Methods,'' in  \emph{Handbook of Applied Mathematics}, C. E. Pearson, Editor (Van Nostrand Reinhold,New York, 1983), pp. 571--576. 
+ 
+ \bibitem{Toll}  J. S.Toll, ``Causality and the dispersion relation: Logical foundations,'' Phys. Rev. \textbf{104},
+ 1760--1770 (1956).
+ 
+ 
+ 
+ \bibitem{Nussenzveig} H. M.  Nussenzveig, \emph{Causality and Dispersion Relations} (Academic Press, NewYork, 1972),
+ pp.  11--28.
+ 
+ 
+ \bibitem{Sommerfeld} A. Sommerfeld, ``Die Greensche Funktion der Schwingungsgleichung'' (The Green's function of the oscillation equation), Jahresber. Deutsche Math. Ver. \textbf{21}, pp. 309--353 (1912).
+
+ 
+ \bibitem{Lesser} M. Lesser and D. G. Crighton, ``Physical acoustics and the method of matched asymptotic expansions,'' \emph{Physical Acoustics}, Vol. XI (W. P. Mason and R. N. Thurston, editors) (Academic Press, New York, 1975), 69--149.
+ 
+ \bibitem{RayleighApertures} J. W. S. Rayleigh, ``On the passage of waves through apertures in plane screens and allied problems,'' Phil. Mag. \textbf{43}, 259--272 (1897).
+ 
+ 
+ \bibitem{RayleighSlits}  J. W. S. Rayleigh, ``On the incidence of aerial and electric waves upon small obstacles in the form of ellipsoids or elliptic cylinders and on the passage of electric waves through a circular aperture in a conducting screen,'' Phil. Mag. \textbf{44}, 28--52 (1897).
+ 
+ \bibitem{Thompson} C. Thompson, ``Linear inviscid wave propagation in a waveguide having a single boundary discontinuity,'' J. Acoust. Soc. Am. \textbf{75},  346--355 (1984).
+ 
+ 
+ \bibitem{Martin}  P. A. Martin and R. A. Dalrymple, ``Scattering of long waves by cylindrical obstacles and gratings using matched asymptotic expansions,'' J. Fluid Mech. \textbf{188}, 465--490 (1988).
+ 
+ 
+ \bibitem{PierceDisappearing} A. D. Pierce, ``Guided mode disappearance during upslope propagation in variable depth shallow water overlying a fluid bottom,'' J. Acoust. Soc. Am. \textbf{72},  523--531 (1982). 
+ 
+ 
+ \bibitem{LaplaceEquation}  F. B. Hildebrand, \emph{Advanced Calculus for Applications}  (Prentice-Hall, Englewood Cliffs, 1962), p. 434.  
+ 
+ 
+ \bibitem{minimum}   M. Van Dyke, \emph{Perturbation Methods in Fluid Mechanics}, annotated edition (Parabolic Press, Stanford, 1975), p. 53.
+
+ 
+ \bibitem{FourierSeries}  W. E. Byerly, \emph{An Elementary Treatise on Fourier Series}  (Ginn and Company, Boston, 1893), pp.  30--54. 
+ 
+  
+ \bibitem{VanDyke}  M. Van Dyke, \emph{Perturbation Methods in Fluid Mechanics}, annotated edition (Parabolic Press, Stanford, 1975), pp. 89--90.
+ 
+ \bibitem{CrightonBookChapter} D. G. Crighton, ``Matched asymptotic expansions applied to acoustics,'' in \emph{Modern Methods in Analytical Acoustics}  (Springer-Verlag, London,  1992), pp. 168--208.
+ 
+  \bibitem{RayleighPointSource}   J. W. S. Rayleigh, \emph{The Theory of Sound}, Vol. 2, second edition, 1896 (reprinted Dover, New York, 1945), p. 106. 
+  
+  \bibitem{RayleighPointLine} J. W. S. Rayleigh, ``On point-, line-, and plane-sources of sound, ''Proc. London Math. Soc.  \textbf{19}   504--507 (1888).
+  
+  
+ \bibitem{LeviCivita}  T. Levi-Civita, ``On a class of integrals of the equation $A^2\partial^2 V/\partial t^2 = 
+\partial^2 V/\partial x^2 + \partial^2 V/\partial y^2$,'' Nuovo Cimento, 4th Series, \textbf{6}, 204--209 (1897).
+ 
+ \bibitem{Lamb2D} H. Lamb, ``On wave propagation in two dimensions,'' Proc. of the London Math. Soc. \textbf{35}, 141--161 (1902).
+  
+ 
+
+ 
+ 
+ 
+ 
+ 
+ \bibitem{CourantDirichlet}  R. Courant, \emph[Differential and Integral Calculus], Vol. 1, Second edition (English Translation, Interscience  Publishers, New York, 1937), pp. 251--253.
+
+
+ 
+ 
+ \bibitem{Watson}  G. N. Watson, \emph{Theory of Bessel Functions}, first published 1922, second edition, 1944
+ (Cambridge Univ. Press, paperback edition of 1966), pp. 73--75, pp. 167--180. 
+   
+
+ \bibitem{MorseFeshbachHankel} P. M. Morse and H. Feshbach, \emph{Methods of Theoretical Physics}, Part I
+ (McGraw-Hill Book Co., New York, 1953), p. 623. 
+ 
+ 
+\bibitem{AbramowitzStegun}  M. Abramowitz and I. A. Stegun (editors), \emph{Handbook of Mathematical Functions} (Dover Publications, New York, 1972), pp. ix--xiv, 358--389.
+ 
+ 
+\bibitem{Stokes}  G. G. Stokes, ``On the communication of vibration from a vibrating body to a surrounding gas,''   Phil. Trans. Roy. Soc. London, \textbf{158}, pp 447-463 (1868).
+
+\bibitem{RayleighStokes} J. W. S. Rayleigh, \emph{The Theory of Sound}, Vol. 2, second edition, 1896 (reprinted Dover, New York, 1945), pp. 300--306.
+
+
+ 
+ \bibitem{LeppingtonJordan}  F. F. Leppington, ``Complex variable theory,'' in \emph{Modern Methods in Analytical Acoustics} (Springer-Verlag, London,  1992), pp. 3--45.
+  
+
+ 
+
+  
+ \bibitem{AbramowitzExponential}   W. Gautschi and W. F. Cahill, ``Exponential integral and related functions,'' in \emph{Handbook of Mathematical Functions}, edited by M. Abramowitz and I. A. Stegun (Dover Publications, New York, 1972), pp. 227--251.
+
+   
+  
+ \bibitem{WhittakerMascheroni} E. T. Whittaker and G. N. Watson, \emph{A Course of Modern Analysis}, Fourth Edition, 1927 (Cambridge Univ. Press, reprint of 1973), pp. 235--236, 243.  
+ 
+ \bibitem{MorseMascheroni} P. M. Morse and H. Feshbach, \emph{Methods of Theoretical Physics}, Part I,
+ (McGraw-Hill Book Co., New York, 1953), p. 422.
+ 
+ \bibitem{DeMorgan}  A. De Morgan, \emph{The Differential and Integral Calculus} (Baldwin and Cradock, London, 1842), pp.652--653.
+  
+
+
+ 
+ 
+ \bibitem{Courantmorecomplicated} R. Courant,   \emph{Differential and Integral Calculus}, Vol. 1, Second edition (English Translation, Interscience  Publishers, New York, 1937), pp. 191--195.
+
+
+   
+ 
+ 
+\bibitem{LambTremors} H. Lamb, ``On the propagation of tremors over the surface of an elastic solid,'' Phil. Trans. Roy. Soc. London, Series A, \textbf{203}, pp. 1--42.
+
+\bibitem{MorseGreenFunction} P. M. Morse and
+H. Feshbach, \emph{Methods of Theoretical Physics}, Vol. 1 (McGraw-Hill Book Co., New York, 1953), pp. 805, 810.
+
+
+\bibitem{Lighthill} M. J. Lighthill, \emph{Introduction to Fourier Analysis and Generalized Functions} (Cambridge Univ. Press, 1964), pp. 15--29.   
+
+\bibitem{branch}  G. F. Carrier, M. Krook, and C. E. Pearson, \emph{Functions of a Complex Variable} (McGraw-Hill, New York, 1966), pp. 22--24, 77--94.
+
+\bibitem{Deavenport}  R. L. Deavenport, ``A normal mode theory of an underwater acoustic duct by means of Green's function,'' Radio Science, \textbf{1},  709--724 (1966).
+
+\bibitem{Bucker} H. P. Bucker,  ``Propagation in a liquid layer lying over a liquid half-space (Pekeris cut),''
+J. Acoust. Soc. Amer., \textbf{65}, 906--908 (1979).
+
+
+\bibitem{waterwavesolution}   M. J. Lighthill, \emph{Waves in Fluids} (Cambridge Univ. Press, 1978), pp. 208--211.
+
+\bibitem{Landau} L. D. Landau and E. M. Lifshitz, \emph{Fluid Mechanics} (Addison-Wesley, Reading, MA, 1959), pp. 36--39.
+
+ 
+
+\bibitem{JungerFeit} M. C. Junger and D. Feit, \emph{Sound, Structures, and their Interaction} (Acoustical Society of America, Melville, NY, 1993),  pp. 33, 106, 192.
+ 
+ 
+ 
+ 
+ \bibitem{Gradshteyn}  I. S. Gradshteyn and I. M. Ryzhik, \emph{Table of Integrals, Series, and Products}, Fourth Edition prepared by Y. V. Geronimus and Y. Tseytlin, translation edited by A. Jeffrey (Academic Press, New York, 1965), p. 8, item 0.236, formula 5.
+ 
+ 
+ \bibitem{Bromwich} T. J. I. Bromwich, \emph{An Introduction to the Theory of Infinite Series}, Second Edition Revised (Macmillan, London, 1926, reprinted 1959), p. 52, exercise 22.
+
+ 
+ 
+ 
+  
+ \bibitem{Ursell1949} F. Ursell, ``On the heaving motion of a circular cylinder on the surface of a fluid,'' \emph{Quart. J. Mech. and Applied Math.}, \textbf{2},  218--231 (1949).
+ 
+ 
+ 
+ 
+\bibitem{UrsellFiniteDepth} F. Ursell,``On the virtual-mass and damping coefficients for long waves in water of finite depth,'' J. Fluid Mech. \textbf{76}, 17-28 (1976).
+
+
+\bibitem{Milne} L. M. Milne-Thomson, \emph{Theoretical Hydrodynamics} (Macmillan, London, 1938), pp. 235, 419.
+
+
+
+ \bibitem{BromwichLatter} T. J. I. Bromwich, \emph{An Introduction to the Theory of Infinite Series}, Second Edition Revised (Macmillan, London, 1926, reprinted 1959),   pp. 506--507. 
+ 
+ \bibitem{saddle}  P. Debye, 
+ ``N\"aherungsformeln f\"ur die Zylinderfunktionen f\"ur gro\ss e Werte des Arguments und unbeschr\"ankt 
+ ver\"anderliche Werte des Index'' (Approximate formulas for the cylinder functions for large values of the argument and any value of the index), Mathematische Annalen \textbf{67}, 535--558 (1910).  A translation appears in \emph{The Collected Papers of Peter J. W. Debye} (Interscience, New York, 1954), pp. 583--607.
+ 
+ 
+ \bibitem{Jeffreys} H. Jeffreys and B. W. Jeffreys, \emph{Methods of Mathematical Physics}, 3rd edition, reprint of 1978 (Cambridge Univ. Press, 1978),  pp. 503--506.
+ 
+ \bibitem{Mathews} J. Mathews and R. L. Walker, \emph{Mathematical Methods of Physics},
+ 2nd edition (Benjamin-Cummings, Menlo Park, 1970), pp. 82--90.
+
+
+ 
+
+ 
+ 
+  
+ \end{thebibliography}
+ 
+ 
+ \newpage
+ 
+ \begin{center}
+ 
+ \large{Figure Captions}
+ 
+ 
+ \end{center}
+ 
+ 
+ \noindent
+ Figure 1.  Sketch illustrating the problem of acoustic radiation caused by the vibrations of a long rigid cylinder oscillating in a compliant baffle.
+ 
+ \smallskip
+ 
+ \noindent
+ Figure 2.  Sketch illustrating terminology used in the statement of the acoustic energy corollary in terms of volume and surface integrals.
+ 
+  \smallskip
+ 
+ \noindent
+ Figure 3.  Sketch illustrating the use of the energy corollary for transient radiation from the moving cylinder.  The outer radius is selected to be so large that the disturbance has not yet reached that radius.
+ 
+ \smallskip
+ 
+ \noindent
+ Figure 4.   Sketch illustrating the problem of the radiation of surface waves and other pressure disturbances by an oscillating horizontal  cylinder on the surface of a  fluid bounded by a compliant surface. 
+ \smallskip
+ 
+ \noindent
+ Figure 5.  General sketch of the complex plane for the complex angular velocity $\omega$, indicating general location of singularities for the Fourier transform of a function of time that is zero before some initial  time.
+ 
+ \smallskip
+ 
+ \noindent
+ Figure 6.   Sketch illustrating the concepts of inner and outer regions for problems involving an oscillating cylinder at the edge of a half-space.  
+ \smallskip
+ 
+ \noindent
+ Figure 7.  Sketch illustrating the concept of an outgoing cylindrical wave as being a superposition of waves from point sources spaced along the symmetry axis.
+ \smallskip
+ 
+ \noindent
+ Figure 8.  Deformed contour used as an initial step for the determination of an approximate expression of the outer solution for small arguments.
+ \smallskip
+ 
+ \noindent
+ Figure 9.  Sketch showing location of hypothetical line source and image source used in the mathematical construction of an outer solution for the general problem discussed in the present paper.  The vibrating interface   serves as a third source in the construction.
+ \smallskip
+ 
+ \noindent
+ Figure 10.  Selection of branch cuts and location of poles for the contour integration when the Hankel function is represented as a Fourier transform involving an integration over the horizontal wave number.
+ \smallskip
+ 
+ \noindent
+ Figure 11.  Resulting path of integration in the complex horizontal wave number plane for the Hankel function in the limit when the artificial damping parameter goes to zero.
+ \smallskip
+ 
+ 
+ 
+ \noindent
+ Figure 12.  Deformed contour for the outer solution of the general  problem discussed in the present paper, the deformation being such that a term corresponding to an outwardly propagating surface wave is evident.
+ \smallskip
+ 
+   
+ 
+ 
+ 
+ \end{document}
+ 
+  

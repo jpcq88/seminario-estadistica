@@ -11,3 +11,4 @@
 library(data.table) # manipulación de datos
 library(ggplot2) # gráficos de calidad
 library(gridExtra) # continen la función grid.arrange()
+library(xtable) # exportar tabals a LaTeX

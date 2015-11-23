@@ -1,0 +1,100 @@
+l---
+title: "Hallazgos"
+author: "Juan Pablo Calle Quintero"
+date: "24 October 2015"
+output: html_document
+---
+
+- Edad muerte: 78.26 % de los niños menores de un año del Chocó que mueren lo hacen antes de cumplir el mes de vida. Para la Guajira es 61.11 % y para el resto de país es 66.53 %.
+
+```{r}
+datos_1m[edad_muerte_meses < 12,
+         table(nom_depart, edad_muerte_meses, useNA = 'ifany')]
+ggplot(data = datos_orig[hijo_vivo_muerto == 0]) + theme_bw(12) +
+  geom_density(aes(x = edad_muerte_meses, linetype = nom_depart)) +
+  scale_linetype_manual(values = c('solid', 'longdash', 'dotted')) +
+  labs(x = 'edada fallecimiento [meses]', y = 'densidad') +
+  theme(
+    legend.title = element_blank()
+  )
+```
+
+- Hijos no deseados: La proporción de niños menores de un año que mueren en La Guajira y Chocó y que no fueron deseados en el momento de concebirlos es mayor respecto al resto del país, 38.89 %, 30.43 % y 23.79 % respectivamente. En general, en estos dos departamento la proporción de hijos no deseados es mayor que en el resto de país, 30.06 %, 32.30 % y 22.99 % respectivamente.
+
+```{r}
+prop.table(datos_1m[edad_muerte_meses < 12,
+                    table(nom_depart, hijo_deseado, useNA = 'ifany')],
+           margin = 1)
+prop.table(datos_orig[, table(nom_depart, hijo_deseado, useNA = 'ifany')],
+           margin = 1)
+```
+
+- Nivel de educación de la madre: En Chocó, 8.70 % de las madres sin educación han perdido por lo menos un hijo menor de un año. De las madres que no han perdido hijos, solo 4.16 % no tienen educación. En La Guajira, 94.45 % de las mares que han perdido hijos menores de un año no pasan de bachillerato, mientras que en las madres que no han perdido hijos el porcentaje llega a 84.85 %, un 10 % menos.
+
+```{r}
+# max_nivel_edu (madre): 0: sin edu, 1: Primaria, 2: secundaria, 3: superior
+prop.table(datos_1m[edad_muerte_meses < 12,
+                    table(nom_depart, max_nivel_edu, useNA = 'ifany')],
+           margin = 1)
+prop.table(datos_0m[, table(nom_depart, max_nivel_edu, useNA = 'ifany')],
+           margin = 1)
+```
+
+- La fuente de agua: La fuente de agua en La Guajira parece estar asociada con la mortalidad infantil. 16.67 % de las madres que perdieron un hijo tomaban agua del río, mientras que las madres que no han perdido hijos, solo 6.35 % toman el agua del río. Pasa algo similar con el agua de las fuente públicas, 38.89 % vs. 22.80 %. El agua sigue siendo un determinante en La Guajira.
+
+```{r}
+
+# fuente_agua:
+# 11: acueducto emp urbana, 12: acueducto sist rural, 13: grifo público
+# 21: fuente pública con bomba, 22: fuente pública sin bomba, 42: rio,
+# 51: lluvia, 71: embotellada, 96: otra.
+prop.table(datos_1m[edad_muerte_meses < 12,
+                    table(nom_depart, fuente_agua, useNA = 'ifany')],
+           margin = 1)
+prop.table(datos_0m[, table(nom_depart, fuente_agua, useNA = 'ifany')],
+           margin = 1)
+```
+
+
+- Tipo baño: tanto en La Guajira como en Chocó, la proporción de hogares sin baño de las madres que han perdido hijos es mayor respecto a los hogares de las madres que no han perdido hijos, 60.87 % vs 40.90 % en Chocó y 39.09 % vs 44.44 % en La Guajira. En Chocó, ningún hogar de las madres que han perdido hijo tiene baño con alcantarillado. Parece que la carencia de alcantarillado puede estar asociado con la mortalidad infantil.
+
+```{r}
+
+# tipo_banio:
+# 11: inodoro con alcant, 12: inodoro poso séptico, 13: inodoro al patio,
+# 21: letrina, 22: letrina al rio, 31: no tiene baño
+prop.table(datos_1m[edad_muerte_meses < 12,
+                    table(nom_depart, tipo_banio, useNA = 'ifany')],
+           margin = 1)
+prop.table(datos_0m[, table(nom_depart, tipo_banio, useNA = 'ifany')],
+           margin = 1)
+```
+
+- Nacimiento por cesárea: en Chocó la proporción de madres que tuvieron parto por cesárea y perdieron un hijo es del doble respecto a las mujeres que no han perdido hijos, 30.43 % vs. 14.38 %. Parece que los partos por cesárea están asociados con mayores riesgos de perder hijos en Chocó. 
+
+```{r}
+prop.table(datos_1m[edad_muerte_meses < 12,
+                    table(nom_depart, nacimiento_cesarea, useNA = 'ifany')],
+           margin = 1)
+prop.table(datos_0m[, table(nom_depart, nacimiento_cesarea, useNA = 'ifany')],
+           margin = 1)
+```
+
+- Peso al nacer: el La Guajira los niños menores de un año que fallecen nacen con un peso muy inferior a los niños que sobreviven, el peso promedio al nacer de los niños que fallecieron en La Guajira es 2.28 kg, considerado de bajo peso por la UNICEF (< 2.5 kg), lo que puede indicar una relaión de las mortalidad infantil con la desnutrición tanto de la madre como del niño. En los otros departamentos noy hay una diferencia significativa en el peso al nacer de los niños que mueren y sobreviven.
+
+```{r}
+
+# peso_al_nacer_kg: solo de los niños nacidos entre hace 3 y 5 años
+datos_1m[edad_muerte_meses < 12, sixnum(peso_al_nacer_kg), by = nom_depart]
+datos_0m[edad_hijo_anios < 1, sixnum(peso_al_nacer_kg), by = nom_depart]
+
+ggplot(data = datos_orig) + theme_bw(12) +
+  geom_boxplot(aes(x = nom_depart, y = peso_al_nacer_kg,
+                   linetype = factor(hijo_vivo_muerto)),
+               outlier.size = 1, position = position_dodge(width = 0.8)) +
+  labs(x = 'Departamento', y = 'Peso al nacer [kg]') +
+  scale_linetype_discrete(breaks = c(0, 1), labels = c('Muertos', 'Vivos')) +
+  theme(
+    legend.title = element_blank()
+  )
+```
